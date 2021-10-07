@@ -12,7 +12,7 @@
                 <h1 class="m-0">Dashboard</h1>
             </div>
             <div class="col-lg-6 col-6">
-                <a href="" class="btn btn-primary float-right">Add Request</a>
+                <a href="{{route('order.create')}}" class="btn btn-primary float-right">Add Request</a>
             </div><!-- /.col -->
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
