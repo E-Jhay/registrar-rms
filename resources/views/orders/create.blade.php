@@ -19,71 +19,66 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-          <div class="col-md-12">
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Fill-out form</h3>
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Fill-out form</h3>
   
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fas fa-minus"></i></button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                    <div class="form-group col-3">
-                        <label for="inputName">Mobile</label>
-                        <input type="text" id="inputName" class="form-control">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                        </div>
                     </div>
-                    <div class="form-group col-3">
-                        <label for="inputName">OR Number</label>
-                        <input type="text" id="inputName" class="form-control">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-3">
+                                <label for="inputName">Mobile</label>
+                                <input type="text" id="inputName" class="form-control">
+                            </div>
+                            <div class="form-group col-3">
+                                <label for="inputName">OR Number</label>
+                                <input type="text" id="inputName" class="form-control">
+                            </div>
+                        </div>
+                        <hr class="col-12 bg-primary">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="inputName">Name</label>
+                                <input type="text" id="inputName" class="form-control">
+                            </div>
+                            <div class="form-group col-3">
+                                <label for="inputStatus">Document Type</label>
+                                <select class="form-control custom-select">
+                                <option selected disabled>Select one</option>
+                                <option>On Hold</option>
+                                <option>Canceled</option>
+                                <option>Success</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-3">
+                                <div class="float-right mt-3">
+                                    <a href="#" class="btn btn-block btn-danger mt-3">X</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="row">
+                            <div class="form-group col-12">
+                              <a href="#" class="btn btn-secondary">Add another row</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                              <button type="submit" class="btn btn-primary">Insert Request/s</button>
+                            </div>
+                        </div>
                     </div>
+                    <!-- /.card-body -->
                 </div>
-                <hr class="col-12 bg-primary">
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="inputName">Name</label>
-                        <input type="text" id="inputName" class="form-control">
-                    </div>
-                    <div class="form-group col-3">
-                        <label for="inputName">Project Name</label>
-                        <input type="text" id="inputName" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputDescription">Project Description</label>
-                  <textarea id="inputDescription" class="form-control" rows="4"></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="inputStatus">Status</label>
-                  <select class="form-control custom-select">
-                    <option selected disabled>Select one</option>
-                    <option>On Hold</option>
-                    <option>Canceled</option>
-                    <option>Success</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="inputClientCompany">Client Company</label>
-                  <input type="text" id="inputClientCompany" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label for="inputProjectLeader">Project Leader</label>
-                  <input type="text" id="inputProjectLeader" class="form-control">
-                </div>
-              </div>
-              <!-- /.card-body -->
+                <!-- /.card -->
             </div>
-            <!-- /.card -->
-          </div>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <a href="#" class="btn btn-secondary">Cancel</a>
-            <input type="submit" value="Create new Porject" class="btn btn-success float-right">
-          </div>
-        </div>
+        
       </section>
       <!-- /.content -->
 </div>
