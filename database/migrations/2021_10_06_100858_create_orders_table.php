@@ -17,11 +17,11 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('ctr_no')->unique();
             $table->string('name');
-            $table->string('contact_no');
+            $table->string('mobile');
             $table->foreignId('document_type_id')->constrained();
             $table->foreignId('status_id')->constrained();
             $table->string('or_no');
-            $table->dateTime('expiration_time');
+            $table->dateTime('expiration_time')->nullable();
             $table->timestamps();
         });
     }
