@@ -8,7 +8,10 @@
           <div class="row">
               <div class="col-sm-6">
                   <h1 class="m-0">Add Requests</h1>
-              </div><!-- /.col -->
+              </div>
+              <div class="col-lg-6 col-6">
+                <a href="{{route('orders.create')}}" class="btn btn-primary float-right">Add Request</a>
+            </div><!-- /.col -->
           </div><!-- /.row -->
       </div><!-- /.container-fluid -->
       </div>
@@ -56,9 +59,10 @@
                               </div>
                               <!-- /.card-header -->
                               <div class="card-body table-responsive p-0" style="height: 300px;">
-                                <table class="table table-head-fixed">
+                                <table class="table table-hover">
                                   <thead>
                                     <tr>
+                                      <th>Id.</th>
                                       <th>Control No.</th>
                                       <th>Name</th>
                                       <th>Document Type</th>
@@ -70,6 +74,7 @@
                                   <tbody>
                                     @forelse ($orders as $order)
                                       <tr>
+                                        <td>{{$order->id}}</td>
                                         <td>{{$order->ctr_no}}</td>
                                         <td>{{$order->name}}</td>
                                         <td>{{$order->document_type->name}}</td>
