@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @livewire('orders')
+                        @livewire('orders-create')
                     </div>
                     <!-- /.card-body -->
                 </div>

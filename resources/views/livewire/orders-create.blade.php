@@ -40,7 +40,7 @@
                 wire:model="orderItems.{{$index}}.document_type_id">
                 <option value="" disabled>Select document</option>
                     @foreach ($document_types as $document_type)
-                        <option value="{{$document_type->id}}">{{$document_type->name}}</option>
+                        <option value="{{$document_type->id - 1}}">{{$document_type->name}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('orderItems.' . $index . '.document_type_id'))

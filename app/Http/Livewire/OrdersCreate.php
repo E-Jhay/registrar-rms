@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Http\Request;
 
-class Orders extends Component
+class OrdersCreate extends Component
 {
     public $mobile, $or_no;
     public $document_types = [];
@@ -54,22 +54,26 @@ class Orders extends Component
         ]);
 
         $expiration_time = Carbon::now()->addDays(10);
-        $documents_array = array(1 => 'ROR', 2 => 'COR', 3 => 'COG', 4 => 'TOR', 5 => 'CAV', 6 => 'ATL', 7 => 'GWA');
-
+        // $documents_array = array(1 => 'ROR', 2 => 'COR', 3 => 'COG', 4 => 'TOR', 5 => 'CAV', 6 => 'ATL', 7 => 'GWA');
+        $documentTypes = [];
+        $documents_array = DocumentType::select('id', 'code')->get();
+        foreach ($documents_array as $document){
+            array_push($documentTypes, $document['code']);
+        }
         try{
             foreach($this->orderItems as $item){
                 if($item['name'] != null){
-                    $count = Order::where('document_type_id', $item['document_type_id'])->count() + 1;
-                    $code = $documents_array[$item['document_type_id']];
+                    $count = Order::where('document_type_id', $item['document_type_id'] + 1)->count() + 1;
+                    $code = $documentTypes[$item['document_type_id']];
                     if($count < 10)
                         $ctr_no = $code ."-0". $count;
                     else
-                    $ctr_no = $code ."-". $count;
+                        $ctr_no = $code ."-". $count;
                     $order = Order::create([
                         'ctr_no'        =>  $ctr_no,
                         'name'          =>  $item['name'],
                         'mobile'        =>  $this->mobile,
-                        'document_type_id' =>  $item['document_type_id'],
+                        'document_type_id' =>  $item['document_type_id'] + 1,
                         'status_id'        =>  1,
                         'or_no'         =>  $this->or_no,
                         'expiration_time'         =>  $expiration_time,
@@ -93,6 +97,6 @@ class Orders extends Component
     
     public function render()
     {
-        return view('livewire.orders');
+        return view('livewire.orders-create');
     }
 }

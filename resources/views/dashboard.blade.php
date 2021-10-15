@@ -8,10 +8,8 @@
     <div class="content-header">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
-                <h1 class="m-0">Dashboard</h1>
-            </div>
-            <div class="col-lg-6 col-6">
+            <div class="col-sm-12">
+                <h1 class="m-0 d-inline">Dashboard</h1>
                 <a href="{{route('orders.create')}}" class="btn btn-primary float-right">Add Request</a>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -29,7 +27,7 @@
                     <div class="small-box bg-info">
                     <div class="inner">
                         <h3>150</h3>
-                        <p>New Orders</p>
+                        <p>All Requests</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -42,8 +40,8 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
-                        <p>Bounce Rate</p>
+                        <h3>58</h3>
+                        <p>Pending Requests</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -56,11 +54,11 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
-                        <p>User Registrations</p>
+                        <h3>92</h3>
+                        <p>Finished Requests</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-person-add"></i>
+                        <i class="ion ion-pie-graph"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -70,11 +68,11 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
-                        <p>Unique Visitors</p>
+                        <h3>1</h3>
+                        <p>Accounts</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                        <i class="ion ion-person-add"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
