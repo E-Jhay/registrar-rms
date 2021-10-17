@@ -1,4 +1,4 @@
-<form>
+<form wire:submit.prevent="storeItem">
     @csrf
     <div class="row">
         <div class="form-group col-4">
@@ -63,7 +63,7 @@
     </div>
     <div class="row">
         <div class="form-group col-12">
-          <button wire:click.prevent="storeItem()" class="btn btn-primary">Insert Request/s</button>
+          <button type="submit"class="btn btn-primary">Insert Request/s</button>
         </div>
     </div>
 </form>

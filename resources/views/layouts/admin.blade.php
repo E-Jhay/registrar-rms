@@ -65,6 +65,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
             title:message
         })
     })
+
+    window.addEventListener('swal:confirm', event => {
+        // swal({
+        //     title: event.detail.title,
+        //     text: event.detail.text,
+        //     icon: event.detail.type,
+        //     buttons: true,
+        //     dangerMode: true,
+        // })
+        // .then((willDelete) => {
+        //     if(willDelete){
+        //         window.livewire.emit('update', event.detail.id);
+        //     }
+        // })
+        Swal.fire({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Livewire.emit('updateConfirmed', event.detail.id)
+            }
+        })
+    })
 </script>
 </body>
 </html>

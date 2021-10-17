@@ -19,7 +19,7 @@ class DocumentTypeSeeder extends Seeder
         DocumentType::create(['code' => 'COG', 'name' => 'Certificate of Grades']);
         DocumentType::create(['code' => 'TOR', 'name' => 'Transcript of Records']);
         DocumentType::create(['code' => 'CAV', 'name' => 'Certification & Authentication & Verification']);
-        DocumentType::create(['code' => 'ATL', 'name' => 'Authentication Letter']);
+        DocumentType::create(['code' => 'ATL', 'name' => 'Authorization Letter']);
         DocumentType::create(['code' => 'GWA', 'name' => 'General Weighted Average']);
     }
 }

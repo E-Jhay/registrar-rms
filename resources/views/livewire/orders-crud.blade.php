@@ -19,14 +19,13 @@
                     <div class="card p-2">
                         <div class="card-title">
                             <ul class="nav nav-tabs">
-                                <li class="nav-item">
-                                    <a class="nav-link {{ $documentStatus == 1 ? 'active' : null }}" wire:click.prevent="changeStatus(1)" href="#">
-                                        Pending
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                <a class="nav-link {{ $documentStatus == 2 ? 'active' : null }}" wire:click.prevent="changeStatus(2)" href="#">Finished</a>
-                                </li>
+                                @foreach ($statuses as $status)
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ $documentStatus == $status->id ? 'active' : null }}" wire:click.prevent="changeStatus({{$status->id}})" href="#">
+                                            {{$status->name}}
+                                        </a>
+                                    </li>
+                                @endforeach
                                 <li class="nav-item">
                                 <a class="nav-link {{ $documentStatus == '' ? 'active' : null }}" wire:click.prevent="changeStatus('')" href="#">All</a>
                                 </li>
@@ -67,7 +66,9 @@
                                                         OR No
                                                         @include('layouts.partials.sort-icon', ['field' => 'or_no'])
                                                     </th>
-                                                    <th></th>
+                                                    @if ($documentStatus != 3 && $documentStatus != 4)
+                                                        <th></th>
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -79,12 +80,25 @@
                                                     <td>{{$order->document_type->name}}</td>
                                                     <td>{{$order->status->name}}</td>
                                                     <td>{{$order->or_no}}</td>
-                                                    <td>
-                                                        <button wire:click="edit({{ $order->id }})"
-                                                            class="btn btn-primary btn-sm">Edit</button>
-                                                        <button wire:click="delete({{ $order->id }})"
-                                                            class="btn btn-danger btn-sm">Delete</button>
-                                                    </td>
+                                                    @if ($documentStatus != 3 && $documentStatus != 4)
+                                                        <td class="text-center">
+                                                            @if ($order->status_id != 3 && $order->status_id != 4)
+                                                            @if ($order->status_id == 1)
+                                                            <button wire:click="updateConfirm({{ $order->id }})"
+                                                                class="btn btn-warning btn-sm">
+                                                                <i class="fas fa-check"></i>
+                                                                Done
+                                                            </button>
+                                                            @elseif($order->status_id == 2)
+                                                            <button wire:click="updateConfirm({{ $order->id }})"
+                                                                class="btn btn-primary btn-sm">
+                                                                <i class="fas fa-hands-helping"></i>
+                                                                Release
+                                                            </button>
+                                                            @endif
+                                                            @endif
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                                 @empty
                                                     <tr>

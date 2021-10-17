@@ -36,35 +36,14 @@
             Interface
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link
+            <a href="{{route('orders.index')}}" class="nav-link
               {{ request()->is('orders') ? 'active' : null }}
             ">
               <i class="nav-icon fas fa-paperclip"></i>
               <p>
                 Requests
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('orders.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pending</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Finished</p>
-                </a>
-              </li>
-            </ul>
           </li>
           
           <li class="nav-item">
