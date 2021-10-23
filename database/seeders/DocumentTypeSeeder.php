@@ -14,12 +14,12 @@ class DocumentTypeSeeder extends Seeder
      */
     public function run()
     {
-        DocumentType::create(['code' => 'ROR', 'name' => 'Report of Rating']);
-        DocumentType::create(['code' => 'COR', 'name' => 'Certificate of Registration']);
-        DocumentType::create(['code' => 'COG', 'name' => 'Certificate of Grades']);
-        DocumentType::create(['code' => 'TOR', 'name' => 'Transcript of Records']);
-        DocumentType::create(['code' => 'CAV', 'name' => 'Certification & Authentication & Verification']);
-        DocumentType::create(['code' => 'ATL', 'name' => 'Authorization Letter']);
-        DocumentType::create(['code' => 'GWA', 'name' => 'General Weighted Average']);
+        DocumentType::create(['code' => 'ROR', 'name' => 'Report of Rating', 'days_before_expire' => 1]);
+        DocumentType::create(['code' => 'COR', 'name' => 'Certificate of Registration', 'days_before_expire' => 1]);
+        DocumentType::create(['code' => 'COG', 'name' => 'Certificate of Grades', 'days_before_expire' => 10]);
+        DocumentType::create(['code' => 'TOR', 'name' => 'Transcript of Records', 'days_before_expire' => 10]);
+        DocumentType::create(['code' => 'CAV', 'name' => 'Certification & Authentication & Verification', 'days_before_expire' => 10]);
+        DocumentType::create(['code' => 'ATL', 'name' => 'Authorization Letter', 'days_before_expire' => 10]);
+        DocumentType::create(['code' => 'GWA', 'name' => 'General Weighted Average', 'days_before_expire' => 10]);
     }
 }

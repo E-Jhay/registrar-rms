@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-  @livewire('orders-crud')
+  @livewire('documents-crud')
 @endsection
+  

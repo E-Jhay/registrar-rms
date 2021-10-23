@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $allOrders = Order::get()->count();
+        $pendingOrders = Order::where('status_id', 1)->count();
+        $claimableOrders = Order::where('status_id', 2)->count();
+        $accounts = User::get()->count();
+        return view('dashboard', compact('allOrders', 'pendingOrders', 'claimableOrders', 'accounts'));
     }
 }

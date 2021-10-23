@@ -34,71 +34,89 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="pending">
                                 <div class="row">
-                                    <div class="col-sm-12 my-2">
-                                        <input type="text"  class="form-control float-right col-4" placeholder="Search...." wire:model="searchTerm" />
+                                    <div class="form-group col-4 mt-2">
+                                        <input type="text"  class="form-control border-secondary" placeholder="Search...." wire:model.debounce.300ms="searchTerm" />
                                     </div>
+                                    <div class="form-group col-3 mt-2">
+                                        <select class="form-control custom-select border-secondary" wire:model="sortBy">
+                                            <option value="created_at">Date Created</option>
+                                            <option value="name">Name</option>
+                                            <option value="ctr_no">Control Number</option> 
+                                            <option value="or_no">OR Number</option>
+                                            <option value="status_id">Status</option>
+                                            <option value="document_type_id">Document Type</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-3 mt-2">
+                                        <select class="form-control custom-select border-secondary" wire:model="sortDirection">
+                                            <option value="asc">Ascending</option>
+                                            <option value="desc">Descending</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-2 mt-2">
+                                        <select class="form-control custom-select border-secondary" wire:model="perPage">
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                            <option value="250">250</option>
+                                        </select>
+                                    </div>
+                                    @if ($documentStatus != 3 && $documentStatus != 4)
+                                        <div class="form-group col-sm-12 mb-2">
+                                            <button class="btn btn-primary" wire:click.prevent="updateConfirm" @if($bulkDisabled) disabled @endif>Update
+                                                <span class="badge badge-warning right">
+                                                    {{count($selectedItems)}}
+                                                </span></button>
+                                        </div>
+                                    @endif
                                     <div class="col-sm-12">
                                         <div class="table-responsive">
-                                            <table class="table table-bordered table-hover">
-                                            <thead class="bg-info">
+                                            <table class="table table-striped">
+                                            <thead>
                                                 <tr>
-                                                    <th wire:click="sort('id')" style="cursor: pointer">
-                                                        Id
-                                                        @include('layouts.partials.sort-icon', ['field' => 'id'])
-                                                    </th>
-                                                    <th wire:click="sort('ctr_no')" style="cursor: pointer">
-                                                        Control No
-                                                        @include('layouts.partials.sort-icon', ['field' => 'ctr_no'])
-                                                    </th>
-                                                    <th wire:click="sort('name')" style="cursor: pointer">
-                                                        Name
-                                                        @include('layouts.partials.sort-icon', ['field' => 'name'])
-                                                    </th>
-                                                    <th wire:click="sort('document_type_id')" style="cursor: pointer">
-                                                        Document Type
-                                                        @include('layouts.partials.sort-icon', ['field' => 'document_type_id'])
-                                                    </th>
-                                                    <th wire:click="sort('status_id')" style="cursor: pointer">
-                                                        Status
-                                                        @include('layouts.partials.sort-icon', ['field' => 'status_id'])
-                                                    </th>
-                                                    <th wire:click="sort('or_no')" style="cursor: pointer">
-                                                        OR No
-                                                        @include('layouts.partials.sort-icon', ['field' => 'or_no'])
-                                                    </th>
                                                     @if ($documentStatus != 3 && $documentStatus != 4)
-                                                        <th></th>
+                                                        <th class="text-center">
+                                                            @if ($documentStatus != '')
+                                                            <input type="checkbox" wire:model="selectAll">
+                                                            @endif
+                                                        </th>
                                                     @endif
+                                                    <th>Control No</th>
+                                                    <th>Name</th>
+                                                    <th>Document Type</th>
+                                                    <th>Status</th>
+                                                    <th>OR Number</th>
+                                                    <th>Date Created</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @forelse ($orders as $order)
+                                                @forelse ($orders as $index => $order)
                                                 <tr>
-                                                    <td>{{$order->id}}</td>
-                                                    <td>{{$order->ctr_no}}</td>
-                                                    <td>{{$order->name}}</td>
-                                                    <td>{{$order->document_type->name}}</td>
-                                                    <td>{{$order->status->name}}</td>
-                                                    <td>{{$order->or_no}}</td>
                                                     @if ($documentStatus != 3 && $documentStatus != 4)
                                                         <td class="text-center">
                                                             @if ($order->status_id != 3 && $order->status_id != 4)
-                                                            @if ($order->status_id == 1)
-                                                            <button wire:click="updateConfirm({{ $order->id }})"
-                                                                class="btn btn-warning btn-sm">
-                                                                <i class="fas fa-check"></i>
-                                                                Done
-                                                            </button>
-                                                            @elseif($order->status_id == 2)
-                                                            <button wire:click="updateConfirm({{ $order->id }})"
-                                                                class="btn btn-primary btn-sm">
-                                                                <i class="fas fa-hands-helping"></i>
-                                                                Release
-                                                            </button>
-                                                            @endif
+                                                            <input type="checkbox" wire:model="selectedItems.{{$order->id}}" name="selectedItems[{{$order->id}}]" value="{{$order->status_id}}">
                                                             @endif
                                                         </td>
                                                     @endif
+                                                    <td>{{$order->ctr_no}}</td>
+                                                    <td>{{$order->name}}</td>
+                                                    <td>{{$order->document_type->name}}</td>
+                                                    <td>
+                                                        <div class="@if($order->status_id == 1)
+                                                            bg-danger 
+                                                            @elseif($order->status_id == 2)
+                                                            bg-primary
+                                                            @elseif($order->status_id == 3)
+                                                            bg-success
+                                                            @elseif($order->status_id == 4)
+                                                            bg-warning
+                                                            @endif
+                                                         rounded">{{$order->status->name}}</div>
+                                                    </td>
+                                                    <td>{{$order->or_no}}</td>
+                                                    <td>{{$order->created_at->diffForHumans()}}</td>
                                                 </tr>
                                                 @empty
                                                     <tr>

@@ -14,29 +14,20 @@ class OrdersCrud extends Component
     public $searchTerm;
     public $sortBy = 'created_at';
     public $sortDirection = 'asc';
+    public $perPage = 10;
     public $documentStatus = 1;
     public $titlePage = "Pending Request";
-    // public $itemIdBeingUpdated = null;
+    public $selectedItems = [];
+    public $bulkDisabled = true;
+    public $selectAll = false;
 
     protected $listeners = ['updateConfirmed' => 'update'];
     
     public function render()
     {
-        $documentStatus = '%'.$this->documentStatus.'%';
-        $searchTerm = '%'.$this->searchTerm.'%';
+        $this->bulkDisabled = count($this->selectedItems) < 1;
         return view('livewire.orders-crud', [
-            'orders' => Order::with('status', 'document_type')
-                            ->where('status_id', 'like', $documentStatus)
-                            ->where(function($q) use ($searchTerm) {
-                                $q->where('or_no', 'like', $searchTerm)
-                                  ->orWhere('ctr_no', 'like', $searchTerm)
-                                  ->orWhere('name', 'like', $searchTerm);
-                            })
-                            // ->where('or_no', 'like', $searchTerm)
-                            // ->where('ctr_no', 'like', $searchTerm)
-                            // ->where('id', 'like', $searchTerm)
-                            ->orderBy($this->sortBy, $this->sortDirection)
-                            ->paginate(10),
+            'orders' => $this->orders,
             'statuses' => Status::all()
         ]);
     }
@@ -46,16 +37,38 @@ class OrdersCrud extends Component
         $this->resetPage();
     }
 
-    public function sort($field)
+    public function updatedSelectAll($value)
     {
-        if($this->sortDirection == 'desc'){
-            $this->sortDirection = 'asc';
+        if($value){
+            $this->selectedItems = $this->orders->pluck('status_id', 'id')->map(fn ($item) => (string) $item)->toArray();
         }else{
-            $this->sortDirection = 'desc';
+            $this->selectedItems = [];
         }
-
-        return $this->sortBy = $field;
     }
+
+    public function updatedSelectedItems()
+    {
+        foreach (array_keys($this->selectedItems, false, true) as $key) {
+            unset($this->selectedItems[$key]);
+        }
+        $this->selectAll = false;
+    }
+
+    public function getOrdersProperty()
+    {
+        $documentStatus = '%'.$this->documentStatus.'%';
+        $searchTerm = '%'.$this->searchTerm.'%';
+        return Order::with('status', 'document_type')
+        ->where('status_id', 'like', $documentStatus)
+        ->where(function($q) use ($searchTerm) {
+            $q->where('or_no', 'like', $searchTerm)
+              ->orWhere('ctr_no', 'like', $searchTerm)
+              ->orWhere('name', 'like', $searchTerm);
+        })
+        ->orderBy($this->sortBy, $this->sortDirection)
+        ->paginate($this->perPage);
+    }
+
     public function changeStatus($status)
     {
         $fetchStatuses = Status::select('id', 'name')->get();
@@ -66,30 +79,36 @@ class OrdersCrud extends Component
                 $this->titlePage = "All Request";
 
         }
-
+        $this->resetPage();
         return $this->documentStatus = $status;
     }
 
-    public function updateConfirm($id)
+    public function updateConfirm()
     {
-        // $this->itemIdBeingUpdated = $id;
         $this->dispatchBrowserEvent('swal:confirm',[
             'type'  =>  'warning',
             'title' =>  'Are you sure?',
             'text'  =>  '',
-            'id'    =>  $id,
+            // 'id'    =>  $id,
         ]);
     }
-    public function update($id)
+    public function update()
     {
+        // dd($this->selectedItems);
+        
         try{
-            $order = Order::where('id', $id)->first();
-            $order->update(['status_id' => $order['status_id'] + 1]);
-            // Order::find($id)->update(['status_id' => $this->documentStatus + 1]);
+            $this->validate([
+                'selectedItems.*' => ['required', 'in:1,2'],
+            ]);
+            foreach($this->selectedItems as $index => $item){
+                Order::where('id', $index)->update(['status_id' => $item + 1]);
+            }
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
                 'message'=>"Order has been Processed"
             ]);
+            $this->selectedItems = [];
+            $this->selectAll = false;
             $this->resetPage();
         }catch(\Exception $e){
             $this->dispatchBrowserEvent('alert',[
@@ -97,5 +116,7 @@ class OrdersCrud extends Component
                 'message'=>"Something goes wrong while processing order!"
             ]);
         }
+
     }
+
 }

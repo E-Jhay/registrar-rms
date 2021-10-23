@@ -6,7 +6,6 @@ use App\Models\DocumentType;
 use App\Models\Order;
 use Carbon\Carbon;
 use Livewire\Component;
-use Illuminate\Http\Request;
 
 class OrdersCreate extends Component
 {
@@ -22,11 +21,13 @@ class OrdersCreate extends Component
         ];
     }
 
+    // Add Item to array
     public function addItem()
     {
         $this->orderItems[] = ['document_type_id' => '', 'name' => ''];
     }
 
+    // Remove Item to array
     public function removeItem($index)
     {
         unset($this->orderItems[$index]);
@@ -40,6 +41,8 @@ class OrdersCreate extends Component
             ['document_type_id' => '', 'name' => '']
         ];
     }
+
+    // Store Orders/Request to the db
     public function storeItem()
     {
         $this->validate([
@@ -53,12 +56,12 @@ class OrdersCreate extends Component
             'orderItems.*.document_type_id.required'  =>  'The document type is required',
         ]);
 
-        $expiration_time = Carbon::now()->addDays(10);
-        // $documents_array = array(1 => 'ROR', 2 => 'COR', 3 => 'COG', 4 => 'TOR', 5 => 'CAV', 6 => 'ATL', 7 => 'GWA');
+        $documentExpirationDay = [];
         $documentTypes = [];
-        $documents_array = DocumentType::select('id', 'code')->get();
+        $documents_array = DocumentType::select('id', 'code', 'days_before_expire')->get();
         foreach ($documents_array as $document){
             array_push($documentTypes, $document['code']);
+            array_push($documentExpirationDay, $document['days_before_expire']);
         }
         try{
             foreach($this->orderItems as $item){
@@ -69,14 +72,14 @@ class OrdersCreate extends Component
                         $ctr_no = $code ."-0". $count;
                     else
                         $ctr_no = $code ."-". $count;
-                    $order = Order::create([
+                    Order::create([
                         'ctr_no'        =>  $ctr_no,
                         'name'          =>  $item['name'],
                         'mobile'        =>  $this->mobile,
                         'document_type_id' =>  $item['document_type_id'] + 1,
                         'status_id'        =>  1,
                         'or_no'         =>  $this->or_no,
-                        'expiration_time'         =>  $expiration_time,
+                        'expiration_time'         =>  Carbon::now()->addDays($documentExpirationDay[$item['document_type_id']]),
                     ]);
                 }
             }

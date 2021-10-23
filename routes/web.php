@@ -13,12 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-Route::resource('orders', 'App\Http\Controllers\OrdersController');
+Route::resource('/orders', 'App\Http\Controllers\OrdersController');
+Route::view('/documents', 'documents.crud');

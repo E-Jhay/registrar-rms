@@ -9,5 +9,5 @@ class DocumentType extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'code'];
+    protected $fillable = ['name', 'code', 'days_before_expire'];
 }
