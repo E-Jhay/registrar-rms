@@ -50,7 +50,7 @@ class DocumentsCrud extends Component
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'error',
-                'message'=>"Something goes wrong while creating Order!!"
+                'message'=>"Something goes wrong!!"
             ]);
         }
         

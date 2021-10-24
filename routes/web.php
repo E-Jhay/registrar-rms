@@ -21,3 +21,4 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-
 
 Route::resource('/orders', 'App\Http\Controllers\OrdersController');
 Route::view('/documents', 'documents.crud');
+Route::view('/accounts', 'accounts.crud');

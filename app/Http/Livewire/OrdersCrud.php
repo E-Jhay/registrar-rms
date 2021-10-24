@@ -85,7 +85,7 @@ class OrdersCrud extends Component
 
     public function updateConfirm()
     {
-        $this->dispatchBrowserEvent('swal:confirm',[
+        $this->dispatchBrowserEvent('swal:ordersConfirm',[
             'type'  =>  'warning',
             'title' =>  'Are you sure?',
             'text'  =>  '',

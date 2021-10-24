@@ -21,6 +21,11 @@ class OrdersCreate extends Component
         ];
     }
 
+    public function render()
+    {
+        return view('livewire.orders-create');
+    }
+    
     // Add Item to array
     public function addItem()
     {
@@ -59,6 +64,8 @@ class OrdersCreate extends Component
         $documentExpirationDay = [];
         $documentTypes = [];
         $documents_array = DocumentType::select('id', 'code', 'days_before_expire')->get();
+
+        // store documents in an array format 0-n
         foreach ($documents_array as $document){
             array_push($documentTypes, $document['code']);
             array_push($documentExpirationDay, $document['days_before_expire']);
@@ -98,8 +105,4 @@ class OrdersCreate extends Component
 
     }
     
-    public function render()
-    {
-        return view('livewire.orders-create');
-    }
 }

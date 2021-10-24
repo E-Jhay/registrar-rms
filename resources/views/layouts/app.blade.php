@@ -66,19 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         })
     })
 
-    window.addEventListener('swal:confirm', event => {
-        // swal({
-        //     title: event.detail.title,
-        //     text: event.detail.text,
-        //     icon: event.detail.type,
-        //     buttons: true,
-        //     dangerMode: true,
-        // })
-        // .then((willDelete) => {
-        //     if(willDelete){
-        //         window.livewire.emit('update', event.detail.id);
-        //     }
-        // })
+    window.addEventListener('swal:ordersConfirm', event => {
         Swal.fire({
             title: event.detail.title,
             text: event.detail.text,
@@ -89,6 +77,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
             }).then((result) => {
             if (result.isConfirmed) {
                 Livewire.emit('updateConfirmed')
+            }
+        })
+    })
+    window.addEventListener('swal:accountsConfirm', event => {
+        Swal.fire({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+            id: event.detail.id,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Livewire.emit('destroyConfirmed', event.detail.id)
             }
         })
     })
