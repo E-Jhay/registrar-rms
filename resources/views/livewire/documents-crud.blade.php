@@ -22,9 +22,9 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="card">
+                    <div class="card p-3">
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>

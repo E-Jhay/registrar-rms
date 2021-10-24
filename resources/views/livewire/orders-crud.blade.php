@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="card p-2">
+                    <div class="card">
                         <div class="card-title">
                             <ul class="nav nav-tabs">
                                 @foreach ($statuses as $status)
@@ -31,7 +31,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="tab-content">
+                        <div class="tab-content p-3">
                             <div class="tab-pane active" id="pending">
                                 <div class="row">
                                     <div class="form-group col-4 mt-2">
@@ -72,7 +72,7 @@
                                     @endif
                                     <div class="col-sm-12">
                                         <div class="table-responsive">
-                                            <table class="table table-striped">
+                                            <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     @if ($documentStatus != 3 && $documentStatus != 4)

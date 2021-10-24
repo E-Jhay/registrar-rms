@@ -58,7 +58,7 @@
     @endforeach
     <div class="row">
         <div class="form-group col-12">
-          <button class="btn btn-secondary" wire:click.prevent="addItem">Add another row</button>
+          <a class="btn btn-secondary" wire:click.prevent="addItem">Add another row</a>
         </div>
     </div>
     <div class="row">

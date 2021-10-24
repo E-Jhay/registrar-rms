@@ -22,8 +22,8 @@
             @endif
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="card">
-                        <div class="row p-2">
+                    <div class="card p-3">
+                        <div class="row">
                             <div class="form-group col-4">
                                 <input type="text"  class="form-control border-secondary" placeholder="Search...." wire:model.debounce.300ms="searchTerm" />
                             </div>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
