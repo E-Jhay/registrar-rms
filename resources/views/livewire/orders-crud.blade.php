@@ -34,20 +34,27 @@
                         <div class="tab-content p-3">
                             <div class="tab-pane active" id="pending">
                                 <div class="row">
-                                    <div class="form-group col-4 mt-2">
+                                    <div class="form-group col-3 mt-2">
                                         <input type="text"  class="form-control border-secondary" placeholder="Search...." wire:model.debounce.300ms="searchTerm" />
                                     </div>
                                     <div class="form-group col-3 mt-2">
+                                        <select class="form-control custom-select border-secondary" wire:model="sortId">
+                                            <option value="">All</option>
+                                            @foreach ($documentTypes as $documentType)
+                                            <option value="{{$documentType->id}}">{{$documentType->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-2 mt-2">
                                         <select class="form-control custom-select border-secondary" wire:model="sortBy">
                                             <option value="created_at">Date Created</option>
                                             <option value="name">Name</option>
                                             <option value="ctr_no">Control Number</option> 
                                             <option value="or_no">OR Number</option>
-                                            <option value="status_id">Status</option>
-                                            <option value="document_type_id">Document Type</option>
+                                            <option value="department_id">OR Number</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-3 mt-2">
+                                    <div class="form-group col-2 mt-2">
                                         <select class="form-control custom-select border-secondary" wire:model="sortDirection">
                                             <option value="asc">Ascending</option>
                                             <option value="desc">Descending</option>
@@ -84,6 +91,7 @@
                                                     @endif
                                                     <th>Control No</th>
                                                     <th>Name</th>
+                                                    <th>Department</th>
                                                     <th>Document Type</th>
                                                     <th>Status</th>
                                                     <th>OR Number</th>
@@ -103,6 +111,7 @@
                                                     <td>{{$order->ctr_no}}</td>
                                                     <td>{{$order->name}}</td>
                                                     <td>{{$order->document_type->name}}</td>
+                                                    <td>{{$order->department->name}}</td>
                                                     <td>
                                                         <div class="@if($order->status_id == 1)
                                                             bg-danger 

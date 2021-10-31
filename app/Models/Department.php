@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DocumentType extends Model
+class Department extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'code', 'days_before_expire'];
+    protected $fillable = ['name'];
 
     public function orders()
     {

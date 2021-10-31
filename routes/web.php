@@ -20,5 +20,6 @@ Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 Route::resource('/orders', 'App\Http\Controllers\OrdersController');
-Route::view('/documents', 'documents.crud');
-Route::view('/accounts', 'accounts.crud');
+Route::view('/documents', 'documents.crud')->name('documents');
+Route::view('/accounts', 'accounts.crud')->name('accounts');
+Route::view('/reports', 'reports.reports')->name('reports');

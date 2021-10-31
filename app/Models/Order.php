@@ -13,6 +13,7 @@ class Order extends Model
         'ctr_no',
         'name',
         'mobile',
+        'department_id',
         'document_type_id',
         'status_id',
         'user_id',
@@ -28,5 +29,9 @@ class Order extends Model
     public function status()
     {
         return $this->hasOne(Status::class, 'id', 'status_id');
+    }
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 }

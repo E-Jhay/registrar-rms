@@ -79,7 +79,47 @@
             </div>
             <!-- /.content -->
             <!-- ./col -->
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Requests</div>
+                    </div>
+                    <div class="card-body">
+                        <div id="barChart" style="height: 23rem;" ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Request Statuses</div>
+                    </div>
+                    <div class="card-body">
+                        <div id="pieChart" style="height: 23rem;" ></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>
 @endsection
+
+@push('js')
+<script>
+    const Barchart = new Chartisan({
+      el: '#barChart',
+      url: "@chart('dashboard_chart')",
+      hooks: new ChartisanHooks()
+        .colors(['#17a2b8'])
+    });
+
+    const Piechart = new Chartisan({
+      el: '#pieChart',
+      url: "@chart('pie_chart')",
+      hooks: new ChartisanHooks()
+        .datasets('doughnut')
+        .pieColors(),
+    });
+</script>
+@endpush
+

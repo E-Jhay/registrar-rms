@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('ctr_no')->unique();
             $table->string('name');
             $table->string('mobile');
+            $table->foreignId('department_id')->constrained();
             $table->foreignId('document_type_id')->constrained();
             $table->foreignId('status_id')->constrained();
             $table->string('or_no');

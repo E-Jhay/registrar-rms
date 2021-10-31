@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Department;
 use App\Models\DocumentType;
 use App\Models\Order;
 use Carbon\Carbon;
@@ -11,13 +12,15 @@ class OrdersCreate extends Component
 {
     public $mobile, $or_no;
     public $document_types = [];
+    public $departments = [];
     public $orderItems = [];
 
     public function mount()
     {
-        $this->document_types = DocumentType::all();
+        $this->document_types = DocumentType::select('id', 'name')->get();
+        $this->departments = Department::select('id', 'name')->get();
         $this->orderItems = [
-            ['document_type_id' => '', 'name' => '']
+            ['document_type_id' => '', 'name' => '', 'department_id' => '']
         ];
     }
 
@@ -29,7 +32,7 @@ class OrdersCreate extends Component
     // Add Item to array
     public function addItem()
     {
-        $this->orderItems[] = ['document_type_id' => '', 'name' => ''];
+        $this->orderItems[] = ['document_type_id' => '', 'name' => '', 'department_id' => ''];
     }
 
     // Remove Item to array
@@ -43,7 +46,7 @@ class OrdersCreate extends Component
         $this->mobile = '';
         $this->or_no = '';
         $this->orderItems = [
-            ['document_type_id' => '', 'name' => '']
+            ['document_type_id' => '', 'name' => '', 'department_id' => '']
         ];
     }
 
@@ -55,10 +58,12 @@ class OrdersCreate extends Component
             'or_no'                         =>  ['required'],
             'orderItems.*.name'             =>  ['required'],
             'orderItems.*.document_type_id' =>  ['required'],
+            'orderItems.*.department_id'    =>  ['required'],
             ],
             [
             'orderItems.*.name.required'             =>  'The name is required',
             'orderItems.*.document_type_id.required'  =>  'The document type is required',
+            'orderItems.*.department_id.required'  =>  'The department is required',
         ]);
 
         $documentExpirationDay = [];
@@ -83,6 +88,7 @@ class OrdersCreate extends Component
                         'ctr_no'        =>  $ctr_no,
                         'name'          =>  $item['name'],
                         'mobile'        =>  $this->mobile,
+                        'department_id' =>  $item['department_id'] + 1,
                         'document_type_id' =>  $item['document_type_id'] + 1,
                         'status_id'        =>  1,
                         'or_no'         =>  $this->or_no,

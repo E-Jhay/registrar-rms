@@ -47,7 +47,7 @@
           </li>
           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('reports')}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Generate Report
@@ -55,7 +55,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/documents" class="nav-link">
+            <a href="{{route('documents')}}" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Document Types
@@ -63,7 +63,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/accounts" class="nav-link">
+            <a href="{{route('accounts')}}" class="nav-link">
               <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Accounts

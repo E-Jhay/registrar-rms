@@ -22,12 +22,13 @@
     </div>
     <hr class="col-12 bg-primary">
     <div class="row">
-        <div class="col-6"><label>Name</label></div>
-        <div class="col-4"><label>Document Type</label></div>
+        <div class="col-4"><label>Name</label></div>
+        <div class="col-3"><label>Document Type</label></div>
+        <div class="col-3"><label>Department</label></div>
     </div>
     @foreach ($orderItems as $index => $orderItem)
         <div class="row">
-            <div class="form-group col-6">
+            <div class="form-group col-4">
                 <input type="text" class="form-control" name="orderItems[{{$index}}][name]" wire:model.lazy="orderItems.{{$index}}.name">
                 @if ($errors->has('orderItems.' . $index . '.name'))
                     <span class="text-danger">
@@ -35,7 +36,7 @@
                     </span>
                 @endif
             </div>
-            <div class="form-group col-4">
+            <div class="form-group col-3">
                 <select class="form-control custom-select" name="orderItems[{{$index}}][document_type_id]"
                 wire:model="orderItems.{{$index}}.document_type_id">
                 <option value="" disabled>Select document</option>
@@ -49,16 +50,30 @@
                     </span>
                 @endif
             </div>
+            <div class="form-group col-3">
+                <select class="form-control custom-select" name="orderItems[{{$index}}][department_id]"
+                wire:model="orderItems.{{$index}}.department_id">
+                <option value="" disabled>Select document</option>
+                    @foreach ($departments as $department)
+                        <option value="{{$department->id - 1}}">{{$department->name ." ". $department->id}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('orderItems.' . $index . '.department_id'))
+                    <span class="text-danger">
+                        {{ $errors->first('orderItems.' . $index . '.department_id') }}
+                    </span>
+                @endif
+            </div>
             <div class="form-group col-2">
                 <div class="float-left">
-                    <a href="#" wire:click.prevent="removeItem({{$index}})" class="btn btn-block btn-danger">X</a>
+                    <a href="#" wire:click.prevent="removeItem({{$index}})" wire:loading.attr="disabled" class="btn btn-block btn-danger">X</a>
                 </div>
             </div>
         </div>
     @endforeach
     <div class="row">
         <div class="form-group col-12">
-          <a class="btn btn-secondary" wire:click.prevent="addItem">Add another row</a>
+          <a class="btn btn-secondary" wire:click.prevent="addItem" wire:loading.attr="disabled">Add another row</a>
         </div>
     </div>
     <div class="row">

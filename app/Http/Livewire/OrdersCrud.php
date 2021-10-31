@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\DocumentType;
 use App\Models\Order;
 use App\Models\Status;
 use Livewire\Component;
@@ -12,6 +13,7 @@ class OrdersCrud extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $searchTerm;
+    public $sortId;
     public $sortBy = 'created_at';
     public $sortDirection = 'asc';
     public $perPage = 10;
@@ -28,7 +30,8 @@ class OrdersCrud extends Component
         $this->bulkDisabled = count($this->selectedItems) < 1;
         return view('livewire.orders-crud', [
             'orders' => $this->orders,
-            'statuses' => Status::all()
+            'statuses' => Status::all(),
+            'documentTypes' => DocumentType::select('id', 'name')->get()
         ]);
     }
 
@@ -58,7 +61,9 @@ class OrdersCrud extends Component
     {
         $documentStatus = '%'.$this->documentStatus.'%';
         $searchTerm = '%'.$this->searchTerm.'%';
+        $sortId = '%'.$this->sortId.'%';
         return Order::with('status', 'document_type')
+        ->where('document_type_id', 'like',  $sortId)
         ->where('status_id', 'like', $documentStatus)
         ->where(function($q) use ($searchTerm) {
             $q->where('or_no', 'like', $searchTerm)
