@@ -31,7 +31,7 @@ class OrdersCrud extends Component
         return view('livewire.orders-crud', [
             'orders' => $this->orders,
             'statuses' => Status::all(),
-            'documentTypes' => DocumentType::select('id', 'name')->get()
+            'documentTypes' => DocumentType::select('id', 'name', 'code')->get()
         ]);
     }
 
@@ -43,7 +43,7 @@ class OrdersCrud extends Component
     public function updatedSelectAll($value)
     {
         if($value){
-            $this->selectedItems = $this->orders->pluck('status_id', 'id')->map(fn ($item) => (string) $item)->toArray();
+            $this->selectedItems = $this->ordersQuery->pluck('status_id', 'id')->map(fn ($item) => (string) $item)->toArray();
         }else{
             $this->selectedItems = [];
         }
@@ -59,19 +59,38 @@ class OrdersCrud extends Component
 
     public function getOrdersProperty()
     {
-        $documentStatus = '%'.$this->documentStatus.'%';
-        $searchTerm = '%'.$this->searchTerm.'%';
-        $sortId = '%'.$this->sortId.'%';
+        // $documentStatus = '%'.$this->documentStatus.'%';
+        // $searchTerm = '%'.$this->searchTerm.'%';
+        // $sortId = '%'.$this->sortId.'%';
+        // return Order::with('status', 'document_type')
+        // ->where('ctr_no', 'like',  $sortId)
+        // ->where('status_id', 'like', $documentStatus)
+        // ->where(function($q) use ($searchTerm) {
+        //     $q->where('or_no', 'like', $searchTerm)
+        //       ->orWhere('ctr_no', 'like', $searchTerm)
+        //       ->orWhere('name', 'like', $searchTerm);
+        // })
+        // ->orderBy($this->sortBy, $this->sortDirection)
+        // ->paginate($this->perPage);
+        return $this->OrdersQuery->paginate($this->perPage);
+    }
+
+    public function getOrdersQueryProperty()
+    {
+        $documentStatus = $this->documentStatus;
+        $searchTerm = $this->searchTerm;
+        $sortId = $this->sortId;
         return Order::with('status', 'document_type')
-        ->where('document_type_id', 'like',  $sortId)
-        ->where('status_id', 'like', $documentStatus)
-        ->where(function($q) use ($searchTerm) {
-            $q->where('or_no', 'like', $searchTerm)
-              ->orWhere('ctr_no', 'like', $searchTerm)
-              ->orWhere('name', 'like', $searchTerm);
+        ->where('status_id', $documentStatus)
+        ->when($sortId, function($q) use ($sortId) {
+            $q->where('document_type_id', $sortId);
         })
-        ->orderBy($this->sortBy, $this->sortDirection)
-        ->paginate($this->perPage);
+        ->when($searchTerm, function($q) use ($searchTerm) {
+            $q->where('or_no', $searchTerm)
+              ->orWhere('ctr_no', $searchTerm)
+              ->orWhere('name', $searchTerm);
+        })
+        ->orderBy($this->sortBy, $this->sortDirection);
     }
 
     public function changeStatus($status)

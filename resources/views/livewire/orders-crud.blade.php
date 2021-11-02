@@ -1,3 +1,15 @@
+@push('css')
+<style>
+    .nav-tabs .nav-link{
+        color: #000;
+    }
+    .nav-tabs .nav-link.active{
+        color: #fff;
+        background-color: #007bff;
+        border-color: trasparent;
+    }
+</style>
+@endpush
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -49,9 +61,9 @@
                                         <select class="form-control custom-select border-secondary" wire:model="sortBy">
                                             <option value="created_at">Date Created</option>
                                             <option value="name">Name</option>
+                                            <option value="department_id">Department</option>
                                             <option value="ctr_no">Control Number</option> 
                                             <option value="or_no">OR Number</option>
-                                            <option value="department_id">OR Number</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-2 mt-2">
@@ -91,8 +103,8 @@
                                                     @endif
                                                     <th>Control No</th>
                                                     <th>Name</th>
-                                                    <th>Department</th>
                                                     <th>Document Type</th>
+                                                    <th>Department</th>
                                                     <th>Status</th>
                                                     <th>OR Number</th>
                                                     <th>Date Created</th>
@@ -122,7 +134,7 @@
                                                             @elseif($order->status_id == 4)
                                                             bg-warning
                                                             @endif
-                                                         rounded">{{$order->status->name}}</div>
+                                                         rounded px-1">{{$order->status->name}}</div>
                                                     </td>
                                                     <td>{{$order->or_no}}</td>
                                                     <td>{{$order->created_at->diffForHumans()}}</td>

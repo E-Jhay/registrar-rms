@@ -1,5 +1,4 @@
 <form wire:submit.prevent="storeItem">
-    @csrf
     <div class="row">
         <div class="form-group col-4">
             <label for="mobile">Mobile</label>
@@ -55,7 +54,7 @@
                 wire:model="orderItems.{{$index}}.department_id">
                 <option value="" disabled>Select document</option>
                     @foreach ($departments as $department)
-                        <option value="{{$department->id - 1}}">{{$department->name ." ". $department->id}}</option>
+                        <option value="{{$department->id - 1}}">{{$department->name}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('orderItems.' . $index . '.department_id'))

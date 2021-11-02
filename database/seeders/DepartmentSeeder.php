@@ -14,11 +14,11 @@ class DepartmentSeeder extends Seeder
      */
     public function run()
     {
-        Department::create(['name' => 'BSIT']);
-        Department::create(['name' => 'BSBA']);
-        Department::create(['name' => 'BSHM']);
-        Department::create(['name' => 'BSE']);
-        Department::create(['name' => 'BEED']);
         Department::create(['name' => 'AGRI']);
+        Department::create(['name' => 'BEED']);
+        Department::create(['name' => 'BSBA']);
+        Department::create(['name' => 'BSE']);
+        Department::create(['name' => 'BSHM']);
+        Department::create(['name' => 'BSIT']);
     }
 }

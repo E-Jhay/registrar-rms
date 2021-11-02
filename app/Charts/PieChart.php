@@ -43,6 +43,6 @@ class PieChart extends BaseChart
         // dd($statuses, $query, $labels, $datasets);
         return Chartisan::build()
             ->labels(array_values($labels))
-            ->dataset('Sample', array_values($datasets));
+            ->dataset('Status Report', array_values($datasets));
     }
 }

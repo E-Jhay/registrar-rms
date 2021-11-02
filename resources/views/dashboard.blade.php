@@ -118,7 +118,7 @@
       url: "@chart('pie_chart')",
       hooks: new ChartisanHooks()
         .datasets('doughnut')
-        .pieColors(),
+        .pieColors(['#dc3545', '#007bff', '#28a745', '#ffc107'])
     });
 </script>
 @endpush
