@@ -108,6 +108,7 @@
                                                     <th>Status</th>
                                                     <th>OR Number</th>
                                                     <th>Date Created</th>
+                                                    <th>Cost</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -138,6 +139,7 @@
                                                     </td>
                                                     <td>{{$order->or_no}}</td>
                                                     <td>{{$order->created_at->diffForHumans()}}</td>
+                                                    <td>{{$order->cost}}</td>
                                                 </tr>
                                                 @empty
                                                     <tr>

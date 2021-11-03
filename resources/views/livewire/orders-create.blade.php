@@ -52,7 +52,7 @@
             <div class="form-group col-3">
                 <select class="form-control custom-select" name="orderItems[{{$index}}][department_id]"
                 wire:model="orderItems.{{$index}}.department_id">
-                <option value="" disabled>Select document</option>
+                <option value="" disabled>Select department</option>
                     @foreach ($departments as $department)
                         <option value="{{$department->id - 1}}">{{$department->name}}</option>
                     @endforeach

@@ -2,18 +2,22 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\MonthlyExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Department;
 use App\Models\DocumentType;
 use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Symfony\Component\HttpFoundation\Response;
 
 class Reports extends Component
 {
     public $month;
     // public $isPrint = false;
     // public $monthYear;
+    public $report, $departments, $documentTypes, $totalCountPerDocs, $totalCount;
     public function render()
     {
         $query = Order::select([
@@ -43,7 +47,11 @@ class Reports extends Component
                 'count' => $item->ordersCount
             ];
         });
+        $this->report = $report;
+        $this->documentTypes = $documentTypes;
+
         $departments = Department::select('name', 'id')->get();
+        $this->departments = $departments;
         // $total = [];
         $totalCountPerDocs = Order::select([
             'document_type_id', 
@@ -57,12 +65,14 @@ class Reports extends Component
         ->get()
         ->pluck('total', 'document_type_id')
         ->toArray();
+        $this->totalCountPerDocs = $totalCountPerDocs;
 
         $totalCount = Order::select('id')
         ->where('status_id', 3)
         ->whereYear('created_at', now()->year)
         ->whereMonth('created_at', $this->month)
         ->count();
+        $this->totalCount = $totalCount;
 
         // dd($query, $report);
         return view('livewire.reports', compact('report', 'departments', 'documentTypes', 'totalCountPerDocs', 'totalCount'));
@@ -74,11 +84,9 @@ class Reports extends Component
         // $this->monthYear = Carbon::createFromFormat('m', $this->month)->format('F')." ". now()->year;
     }
     
-    // public function print()
-    // {
-    //     if($this->isPrint)
-    //         $this->isPrint = false;
-    //     else
-    //         $this->isPrint = true;
-    // }
+    public function export($ext)
+    {
+        abort_if(!in_array($ext, ['xlsx', 'pdf']), Response::HTTP_NOT_FOUND);
+        return Excel::download(new MonthlyExport($this->report, $this->departments, $this->documentTypes, $this->totalCountPerDocs, $this->totalCount, $this->month), 'monthly-accomplishment-report.' .$ext);
+    }
 }

@@ -13,6 +13,7 @@ class Order extends Model
         'ctr_no',
         'name',
         'mobile',
+        'cost',
         'department_id',
         'document_type_id',
         'status_id',

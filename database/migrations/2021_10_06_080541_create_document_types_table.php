@@ -17,6 +17,7 @@ class CreateDocumentTypesTable extends Migration
             $table->id();
             $table->string('code');
             $table->string('name');
+            $table->decimal('price', 10, 2);
             $table->integer('days_before_expire');
             $table->timestamps();
         });

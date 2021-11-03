@@ -59,19 +59,6 @@ class OrdersCrud extends Component
 
     public function getOrdersProperty()
     {
-        // $documentStatus = '%'.$this->documentStatus.'%';
-        // $searchTerm = '%'.$this->searchTerm.'%';
-        // $sortId = '%'.$this->sortId.'%';
-        // return Order::with('status', 'document_type')
-        // ->where('ctr_no', 'like',  $sortId)
-        // ->where('status_id', 'like', $documentStatus)
-        // ->where(function($q) use ($searchTerm) {
-        //     $q->where('or_no', 'like', $searchTerm)
-        //       ->orWhere('ctr_no', 'like', $searchTerm)
-        //       ->orWhere('name', 'like', $searchTerm);
-        // })
-        // ->orderBy($this->sortBy, $this->sortDirection)
-        // ->paginate($this->perPage);
         return $this->OrdersQuery->paginate($this->perPage);
     }
 
@@ -81,7 +68,9 @@ class OrdersCrud extends Component
         $searchTerm = $this->searchTerm;
         $sortId = $this->sortId;
         return Order::with('status', 'document_type')
-        ->where('status_id', $documentStatus)
+        ->when($documentStatus, function ($q) use ($documentStatus) {
+            $q->where('status_id', $documentStatus);
+        })
         ->when($sortId, function($q) use ($sortId) {
             $q->where('document_type_id', $sortId);
         })

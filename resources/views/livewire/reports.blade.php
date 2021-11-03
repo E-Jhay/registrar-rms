@@ -88,13 +88,10 @@
                 <!-- this row will not appear when printing -->
               <div class="row no-print">
                 <div class="col-12">
-                  <button type="button" class="btn btn-success float-right">
+                  <button type="button" wire:click.prevent="export('xlsx')" wire:loading.attr="disabled" class="btn btn-success float-right">
                       <i class="fas fa-file-excel"></i> Excel
                   </button>
-                  <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                    <i class="fas fa-file-pdf"></i> PDF
-                  </button>
-                  <button onclick="print()"class="btn btn-default float-right" style="margin-right: 5px;">
+                  <button onclick="print()"class="btn btn-primary float-right" style="margin-right: 5px;">
                     <i class="fas fa-print"></i> Print
                   </button>
                 </div>

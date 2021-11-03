@@ -13,12 +13,12 @@ class DocumentsCrud extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $isOpen = 0;
-    public $name, $code, $days_before_expire, $documentId;
+    public $name, $code, $days_before_expire, $price, $documentId;
 
     public function render()
     {
         return view('livewire.documents-crud', [
-            'documents' => DocumentType::select('id', 'name', 'code', 'days_before_expire')->paginate(10),
+            'documents' => DocumentType::select('id', 'name', 'code', 'price', 'days_before_expire')->paginate(10),
         ]);
     }
 
@@ -33,6 +33,7 @@ class DocumentsCrud extends Component
         $this->validate([
             'name'  =>  'required',
             'code'  =>  'required',
+            'price'  =>  'required',
             'days_before_expire'    =>  ['required', 'numeric'],
         ]);
 
@@ -40,6 +41,7 @@ class DocumentsCrud extends Component
             DocumentType::updateOrCreate(['id' => $this->documentId], [
                 'name'  =>  $this->name,
                 'code'  =>  $this->code,
+                'price'  =>  $this->price,
                 'days_before_expire'  =>  $this->days_before_expire,
             ]);
 
@@ -64,6 +66,7 @@ class DocumentsCrud extends Component
         $document = DocumentType::findOrFail($id);
         $this->name = $document->name;
         $this->code = $document->code;
+        $this->price = $document->price;
         $this->days_before_expire = $document->days_before_expire;
         $this->documentId = $id;
         $this->emit('gotoTop');
@@ -74,6 +77,7 @@ class DocumentsCrud extends Component
     public function resetFields(){
         $this->name = '';
         $this->code = '';
+        $this->price = '';
         $this->days_before_expire = '';
         $this->documentId = '';
     }

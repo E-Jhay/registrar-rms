@@ -9,7 +9,7 @@ class DocumentType extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'code', 'days_before_expire'];
+    protected $fillable = ['name', 'code', 'price', 'days_before_expire'];
 
     public function orders()
     {

@@ -31,6 +31,7 @@
                                     <th>Name</th>
                                     <th>Code</th>
                                     <th class="text-center">Days before Expire</th>
+                                    <th class="text-center">Price</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -41,6 +42,7 @@
                                         <td>{{$document->name}}</td>
                                         <td>{{$document->code}}</td>
                                         <td class="text-center">{{$document->days_before_expire}}</td>
+                                        <td class="text-center">{{$document->price}}</td>
                                         <td class="text-center">
                                             <button class="btn" wire:click="edit({{$document->id}})"><i class="fas fa-edit text-primary"></i></button>
                                         </td>
