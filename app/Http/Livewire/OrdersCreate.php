@@ -17,7 +17,7 @@ class OrdersCreate extends Component
 
     public function mount()
     {
-        $this->document_types = DocumentType::select('id', 'name')->get();
+        $this->document_types = DocumentType::select('id', 'name')->orderBy('name')->get();
         $this->departments = Department::select('id', 'name')->get();
         $this->orderItems = [
             ['document_type_id' => '', 'name' => '', 'department_id' => '']

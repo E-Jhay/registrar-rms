@@ -18,7 +18,7 @@ class DocumentsCrud extends Component
     public function render()
     {
         return view('livewire.documents-crud', [
-            'documents' => DocumentType::select('id', 'name', 'code', 'price', 'days_before_expire')->paginate(10),
+            'documents' => DocumentType::select('id', 'name', 'code', 'price', 'days_before_expire')->orderBy('name')->paginate(10),
         ]);
     }
 

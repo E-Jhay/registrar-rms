@@ -114,7 +114,18 @@ class OrdersCrud extends Component
                 'selectedItems.*' => ['required', 'in:1,2'],
             ]);
             foreach($this->selectedItems as $index => $item){
-                Order::where('id', $index)->update(['status_id' => $item + 1]);
+                if($item == 1){
+                    Order::where('id', $index)->update([
+                        'status_id' => $item + 1,
+                        'date_finished' => now()
+                    ]);
+                }
+                elseif($item == 2){
+                    Order::where('id', $index)->update([
+                        'status_id' => $item + 1,
+                        'date_received' => now()
+                    ]);
+                }
             }
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',

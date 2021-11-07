@@ -18,6 +18,7 @@ class MonthlyExport implements FromView, ShouldAutoSize
         $this->documentTypes = $documentTypes;
         $this->totalCountPerDocs = $totalCountPerDocs;
         $this->totalCount = $totalCount;
+        $this->month = $month;
     }
 
     public function view(): View

@@ -19,7 +19,7 @@
       </div>
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column nav-flat nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column nav-flat" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
@@ -46,13 +46,32 @@
             </a>
           </li>
           
-          <li class="nav-item">
-            <a href="{{route('reports')}}" class="nav-link">
+          <li class="nav-item has-treeview">
+            <a href="" class="nav-link {{ request()->is('reports') || request()->is('quarterly-reports') ? 'active' : null }}">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Generate Report
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('reports')}}" class="nav-link">
+                  <i class="nav-icon fas fa-table"></i>
+                  <p>
+                    Monthly Report
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('quarterly-reports')}}" class="nav-link">
+                  <i class="nav-icon fas fa-table"></i>
+                  <p>
+                    Quarterly Report
+                  </p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="{{route('documents')}}" class="nav-link">

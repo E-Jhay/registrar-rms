@@ -23,3 +23,4 @@ Route::resource('/orders', 'App\Http\Controllers\OrdersController');
 Route::view('/documents', 'documents.crud')->name('documents');
 Route::view('/accounts', 'accounts.crud')->name('accounts');
 Route::view('/reports', 'reports.reports')->name('reports');
+Route::view('/quarterly-reports', 'reports.quarterly-reports')->name('quarterly-reports');

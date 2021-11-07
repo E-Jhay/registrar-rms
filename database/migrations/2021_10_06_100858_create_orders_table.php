@@ -24,6 +24,8 @@ class CreateOrdersTable extends Migration
             $table->foreignId('status_id')->constrained();
             $table->string('or_no');
             $table->dateTime('expiration_time')->nullable();
+            $table->timestamp('date_received')->nullable();
+            $table->timestamp('date_finished')->nullable();
             $table->timestamps();
         });
     }
