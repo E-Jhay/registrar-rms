@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-  @livewire('reports')
+  @livewire('monthly-reports')
 @endsection
   

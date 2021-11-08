@@ -56,7 +56,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('reports')}}" class="nav-link">
+                <a href="{{route('monthly-reports')}}" class="nav-link">
                   <i class="nav-icon fas fa-table"></i>
                   <p>
                     Monthly Report

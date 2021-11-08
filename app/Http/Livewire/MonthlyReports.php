@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Symfony\Component\HttpFoundation\Response;
 
-class Reports extends Component
+class MonthlyReports extends Component
 {
-    public $month;
+    public $month, $year;
     // public $isPrint = false;
     // public $monthYear;
     // public $report, $departments, $documentTypes, $totalCountPerDocs, $totalCount;
@@ -53,7 +53,7 @@ class Reports extends Component
         // $totalCountPerDocs = $this->totalCountPerDocs;
         // $totalCount = $this->totalCount;
         // dd($query, $report);
-        return view('livewire.reports', [
+        return view('livewire.monthly-reports', [
             'report' => $this->report,
             'departments' => $this->departments,
             'documentTypes' => $this->documentTypes,
@@ -65,6 +65,10 @@ class Reports extends Component
     public function mount()
     {
         $this->month = now()->month - 1;
+        if($this->month == '01')
+            $this->year = now()->year - 1;
+        else
+            $this->year = now()->year;
         // $this->monthYear = Carbon::createFromFormat('m', $this->month)->format('F')." ". now()->year;
     }
 
@@ -77,7 +81,7 @@ class Reports extends Component
             DB::raw('COUNT(id) as ordersCount'),
         ])
         ->where('status_id', 3)
-        ->whereYear('created_at', now()->year)
+        ->whereYear('created_at', $this->year)
         ->whereMonth('created_at', $this->month)
         ->groupBy('department_id')
         ->groupBy('document_type_id')
@@ -120,7 +124,7 @@ class Reports extends Component
             DB::raw('COUNT(id) as total'),
         ])
         ->where('status_id', 3)
-        ->whereYear('created_at', now()->year)
+        ->whereYear('created_at', $this->year)
         ->whereMonth('created_at', $this->month)
         ->groupBy('document_type_id')
         ->orderBy('document_type_id')
@@ -133,7 +137,7 @@ class Reports extends Component
     {
         return Order::select('id')
         ->where('status_id', 3)
-        ->whereYear('created_at', now()->year)
+        ->whereYear('created_at', $this->year)
         ->whereMonth('created_at', $this->month)
         ->count();
     }

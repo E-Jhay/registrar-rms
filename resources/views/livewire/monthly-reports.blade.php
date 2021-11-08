@@ -8,6 +8,12 @@
         <h1>Monthly Reports</h1>
         <div class="input-group mt-2">
           <div class="input-group-prepend">
+              <div class="input-group-text">Year</div>
+          </div>
+          <input type="number" class="form-control col-sm-2" wire:model="year" placeholder="YYYY" min="2020" max="2100">
+        </div>
+        <div class="input-group mt-2">
+          <div class="input-group-prepend">
               <div class="input-group-text">Month</div>
           </div>
           <select class="form-control custom-select col-sm-2" wire:model="month">

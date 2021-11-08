@@ -50,7 +50,7 @@
                 <!-- Table row -->
                 <div class="row">
                   <div class="col-12 table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>Year-Quarter</th>
@@ -79,7 +79,11 @@
                                   </td>
                                   <td>
                                     @foreach ($subValue as $subSubKey => $subSubValue)
-                                      {{$documentCode[$subSubValue['request_type']]}}<br>
+                                      {{$documentCode[$subSubValue['request_type']]}}
+                                      @if ($subSubKey < count($subValue))
+                                      ,
+                                      @endif
+                                      <br>
                                     @endforeach
                                   </td>
                                   <td>
@@ -89,7 +93,11 @@
                                   </td>
                                   <td>
                                     @foreach ($subValue as $subSubKey => $subSubValue)
-                                    {{$documentType[$subSubValue['title_of_request']]}}<br>
+                                    {{$documentType[$subSubValue['title_of_request']]}}
+                                    @if ($subSubKey < count($subValue))
+                                    ,
+                                    @endif
+                                    <br>
                                     @endforeach
                                     of {{$key}}
                                   </td>
@@ -129,7 +137,7 @@
                               @endforeach
                           @empty
                               <tr>
-                                <td colspan="12">No available items</td>
+                                <td colspan="12" class="text-center">No Items Available</td>
                               </tr>
                           @endforelse
                         </tbody>

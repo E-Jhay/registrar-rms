@@ -9,6 +9,7 @@ use App\Models\DocumentType;
 use App\Models\Order;
 use App\Models\Status;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -70,12 +71,12 @@ class QuarterlyReports extends Component
         $query->each(function ($item) use (&$report){
             $report[$item->name][$this->departments[$item->department_id]][$item->id] = [
                 'ctr_no' => $item->ctr_no,
-                'date_received' => Carbon::parse($item->date_received)->format('m-d-Y'),
+                'date_received' => Carbon::parse($item->date_received)->format('Y-m-d'),
                 'request_type' => $item->document_type_id,
                 'title_of_request' => $item->document_type_id,
                 'extension' => $item->date_finished > $item->expiration_time ? 'yes' : 'no',
                 'status' => $item->status_id,
-                'date_finished' => Carbon::parse($item->date_finished)->format('m-d-Y'),
+                'date_finished' => Carbon::parse($item->date_finished)->format('Y-m-d'),
                 'days_lapsed' => Carbon::parse($item->date_finished)->diff($item->created_at)->format("%a"),
                 'cost' => $item->cost,
                 'appeals' => 'none',
@@ -90,7 +91,7 @@ class QuarterlyReports extends Component
         $costQuery = Order::select([
             'name',
             'department_id',
-            \DB::raw('SUM(cost) as cost'),
+            DB::raw('SUM(cost) as cost'),
         ])
         ->where('status_id', 3)
         ->whereYear('created_at', $this->year)

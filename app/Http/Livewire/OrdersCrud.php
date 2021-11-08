@@ -111,7 +111,7 @@ class OrdersCrud extends Component
         
         try{
             $this->validate([
-                'selectedItems.*' => ['required', 'in:1,2'],
+                'selectedItems.*' => ['required', 'in:1,2,4'],
             ]);
             foreach($this->selectedItems as $index => $item){
                 if($item == 1){
@@ -124,6 +124,11 @@ class OrdersCrud extends Component
                     Order::where('id', $index)->update([
                         'status_id' => $item + 1,
                         'date_received' => now()
+                    ]);
+                }
+                elseif($item == 4){
+                    Order::where('id', $index)->update([
+                        'status_id' => 1,
                     ]);
                 }
             }

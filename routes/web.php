@@ -22,5 +22,5 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-
 Route::resource('/orders', 'App\Http\Controllers\OrdersController');
 Route::view('/documents', 'documents.crud')->name('documents');
 Route::view('/accounts', 'accounts.crud')->name('accounts');
-Route::view('/reports', 'reports.reports')->name('reports');
+Route::view('/monthly-reports', 'reports.monthly-reports')->name('monthly-reports');
 Route::view('/quarterly-reports', 'reports.quarterly-reports')->name('quarterly-reports');

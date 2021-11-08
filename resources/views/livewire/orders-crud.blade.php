@@ -81,9 +81,14 @@
                                             <option value="250">250</option>
                                         </select>
                                     </div>
-                                    @if ($documentStatus != 3 && $documentStatus != 4)
+                                    @if ($documentStatus != 3)
                                         <div class="form-group col-sm-12 mb-2">
-                                            <button class="btn btn-primary" wire:click.prevent="updateConfirm" @if($bulkDisabled) disabled @endif>Update
+                                            <button class="btn btn-primary" wire:click.prevent="updateConfirm" @if($bulkDisabled) disabled @endif>
+                                                @if ($documentStatus == 4)
+                                                    Extend
+                                                @else
+                                                    Update
+                                                @endif
                                                 <span class="badge badge-warning right">
                                                     {{count($selectedItems)}}
                                                 </span></button>
@@ -94,7 +99,7 @@
                                             <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    @if ($documentStatus != 3 && $documentStatus != 4)
+                                                    @if ($documentStatus != 3)
                                                         <th class="text-center">
                                                             @if ($documentStatus != '')
                                                             <input type="checkbox" wire:model="selectAll">
@@ -114,9 +119,9 @@
                                             <tbody>
                                                 @forelse ($orders as $index => $order)
                                                 <tr>
-                                                    @if ($documentStatus != 3 && $documentStatus != 4)
+                                                    @if ($documentStatus != 3)
                                                         <td class="text-center">
-                                                            @if ($order->status_id != 3 && $order->status_id != 4)
+                                                            @if ($order->status_id != 3)
                                                             <input type="checkbox" wire:model="selectedItems.{{$order->id}}" name="selectedItems[{{$order->id}}]" value="{{$order->status_id}}">
                                                             @endif
                                                         </td>
@@ -143,7 +148,7 @@
                                                 </tr>
                                                 @empty
                                                     <tr>
-                                                    <td colspan="7" class="text-center">No Items Available</td>
+                                                    <td colspan="9" class="text-center">No Items Available</td>
                                                     </tr>
                                                 @endforelse
                                             </tbody>

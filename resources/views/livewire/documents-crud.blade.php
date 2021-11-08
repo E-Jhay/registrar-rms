@@ -27,7 +27,6 @@
                             <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Name</th>
                                     <th>Code</th>
                                     <th class="text-center">Days before Expire</th>
@@ -38,7 +37,6 @@
                             <tbody>
                                 @forelse ($documents as $document)
                                     <tr>
-                                        <td>{{$document->id}}</td>
                                         <td>{{$document->name}}</td>
                                         <td>{{$document->code}}</td>
                                         <td class="text-center">{{$document->days_before_expire}}</td>
