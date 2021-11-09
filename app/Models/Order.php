@@ -20,6 +20,8 @@ class Order extends Model
         'user_id',
         'or_no',
         'expiration_time',
+        'appeals',
+        'remarks',
     ];
 
     public function document_type()

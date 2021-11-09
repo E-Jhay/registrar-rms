@@ -79,8 +79,8 @@ class QuarterlyReports extends Component
                 'date_finished' => Carbon::parse($item->date_finished)->format('Y-m-d'),
                 'days_lapsed' => Carbon::parse($item->date_finished)->diff($item->created_at)->format("%a"),
                 'cost' => $item->cost,
-                'appeals' => 'none',
-                'remarks' => 'none',
+                'appeals' => $item->appeals,
+                'remarks' => $item->remarks,
             ];
         });
         return $report;

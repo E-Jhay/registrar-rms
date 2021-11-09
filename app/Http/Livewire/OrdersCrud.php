@@ -31,7 +31,7 @@ class OrdersCrud extends Component
         return view('livewire.orders-crud', [
             'orders' => $this->orders,
             'statuses' => Status::all(),
-            'documentTypes' => DocumentType::select('id', 'name', 'code')->get()
+            'documentTypes' => DocumentType::select('id', 'name', 'code')->orderBy('name')->get()
         ]);
     }
 
@@ -100,14 +100,14 @@ class OrdersCrud extends Component
     {
         $this->dispatchBrowserEvent('swal:ordersConfirm',[
             'type'  =>  'warning',
-            'title' =>  'Are you sure?',
+            'title' =>  'Are you sure you want to update selected items?',
             'text'  =>  '',
             // 'id'    =>  $id,
         ]);
     }
-    public function update()
+    public function update($appeals, $remarks)
     {
-        // dd($this->selectedItems);
+        // dd($appeals, $remarks);
         
         try{
             $this->validate([
@@ -117,18 +117,24 @@ class OrdersCrud extends Component
                 if($item == 1){
                     Order::where('id', $index)->update([
                         'status_id' => $item + 1,
-                        'date_finished' => now()
+                        'date_finished' => now(),
+                        'appeals' => $appeals ? $appeals : 'none',
+                        'remarks' => $remarks ? $remarks : 'none'
                     ]);
                 }
                 elseif($item == 2){
                     Order::where('id', $index)->update([
                         'status_id' => $item + 1,
-                        'date_received' => now()
+                        'date_received' => now(),
+                        'appeals' => $appeals ? $appeals : 'none',
+                        'remarks' => $remarks ? $remarks : 'none'
                     ]);
                 }
                 elseif($item == 4){
                     Order::where('id', $index)->update([
                         'status_id' => 1,
+                        'appeals' => $appeals ? $appeals : 'none',
+                        'remarks' => $remarks ? $remarks : 'none'
                     ]);
                 }
             }

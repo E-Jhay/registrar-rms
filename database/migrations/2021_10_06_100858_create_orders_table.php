@@ -26,6 +26,8 @@ class CreateOrdersTable extends Migration
             $table->dateTime('expiration_time')->nullable();
             $table->timestamp('date_received')->nullable();
             $table->timestamp('date_finished')->nullable();
+            $table->string('appeals')->nullable();
+            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }

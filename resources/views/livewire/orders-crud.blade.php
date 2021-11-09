@@ -47,7 +47,7 @@
                             <div class="tab-pane active" id="pending">
                                 <div class="row">
                                     <div class="form-group col-3 mt-2">
-                                        <input type="text"  class="form-control border-secondary" placeholder="Search...." wire:model.debounce.300ms="searchTerm" />
+                                        <input type="text"  class="form-control border-secondary" placeholder="Search by (name/ctr_no/or_no)" wire:model.debounce.300ms="searchTerm" />
                                     </div>
                                     <div class="form-group col-3 mt-2">
                                         <select class="form-control custom-select border-secondary" wire:model="sortId">

@@ -76,12 +76,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
             title: event.detail.title,
             text: event.detail.text,
             icon: event.detail.type,
+            html: `
+                <input
+                type="text"
+                value=""
+                class="form-control mb-2"
+                placeholder="Appeal/s"
+                id="appeals">
+                <input
+                type="text"
+                value=""
+                class="form-control"
+                placeholder="Remarks"
+                id="remarks">`,
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             }).then((result) => {
             if (result.isConfirmed) {
-                Livewire.emit('updateConfirmed')
+                const appeals = Swal.getHtmlContainer().querySelector('#appeals')
+                const remarks = Swal.getHtmlContainer().querySelector('#remarks')
+                // console.log(appeals.value, remarks.value)
+                Livewire.emit('updateConfirmed', appeals.value, remarks.value)
             }
         })
     })
