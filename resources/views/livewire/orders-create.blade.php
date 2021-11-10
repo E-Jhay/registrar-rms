@@ -2,7 +2,12 @@
     <div class="row">
         <div class="form-group col-4">
             <label for="mobile">Mobile</label>
-            <input type="number/text" wire:model.lazy="mobile" class="form-control" value="{{old('mobile')}}">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">+63</div>
+                </div>
+                <input type="number" wire:model.lazy="mobile" class="form-control" value="{{old('mobile')}}">
+            </div>
             @error('mobile')
                 <div class="text-danger">
                     {{$message}}

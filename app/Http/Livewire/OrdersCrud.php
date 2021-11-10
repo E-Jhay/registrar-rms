@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Status;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class OrdersCrud extends Component
 {
@@ -113,6 +114,7 @@ class OrdersCrud extends Component
             $this->validate([
                 'selectedItems.*' => ['required', 'in:1,2,4'],
             ]);
+            
             foreach($this->selectedItems as $index => $item){
                 if($item == 1){
                     Order::where('id', $index)->update([
@@ -138,6 +140,25 @@ class OrdersCrud extends Component
                     ]);
                 }
             }
+
+            // Get the numbers of the selected items
+            $numbers = Order::find(array_keys($this->selectedItems))
+            ->where('status_id', 2)
+            ->pluck('mobile')
+            ->toArray();
+            // make the number unique
+            $unique_numbers = array_unique($numbers);
+            dd($unique_numbers);
+
+            foreach($unique_numbers as $key => $mobile){
+                Nexmo::message()->send([
+                    'to'    =>  '63'.$mobile,
+                    'from'  =>  '639959423520',
+                    'text'  =>  'Your request at the registrar is ready to claim!'
+                ]);
+            }
+
+            
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
                 'message'=>"Order has been Processed"
@@ -148,7 +169,7 @@ class OrdersCrud extends Component
         }catch(\Exception $e){
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'error',
-                'message'=>"Something goes wrong while processing order!"
+                'message'=>$e
             ]);
         }
 

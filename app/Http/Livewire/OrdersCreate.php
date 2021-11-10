@@ -54,7 +54,7 @@ class OrdersCreate extends Component
     public function storeItem()
     {
         $this->validate([
-            'mobile'                        =>  ['required', 'regex:/^09\d{9}$/'],
+            'mobile'                        =>  ['required', 'regex:/^9\d{9}$/'],
             'or_no'                         =>  ['required'],
             'orderItems.*.name'             =>  ['required'],
             'orderItems.*.document_type_id' =>  ['required'],
