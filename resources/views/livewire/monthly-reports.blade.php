@@ -46,7 +46,7 @@
                     <h4>
                       Monthly Accomplishment Report
                     </h4>
-                    <h5>{{\Carbon\Carbon::createFromFormat('m', $month)->format('F')." ". now()->year}}</h5>
+                    <h5>{{\Carbon\Carbon::createFromFormat('m', $month)->format('F')." ". $year}}</h5>
                   </div>
                   <!-- /.col -->
                 </div>

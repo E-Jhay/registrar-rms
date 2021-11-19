@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $allOrders = Order::get()->count();
+        $allOrders = Order::whereMonth('created_at', now()->month)->count();
         $pendingOrders = Order::where('status_id', 1)->count();
         $claimableOrders = Order::where('status_id', 2)->count();
         $accounts = User::get()->count();

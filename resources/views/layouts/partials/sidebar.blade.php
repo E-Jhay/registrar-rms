@@ -47,7 +47,7 @@
           </li>
           
           <li class="nav-item has-treeview">
-            <a href="" class="nav-link {{ request()->is('reports') || request()->is('quarterly-reports') ? 'active' : null }}">
+            <a href="" class="nav-link {{ request()->is('monthly-reports') || request()->is('quarterly-reports') ? 'active' : null }}">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Generate Report
@@ -74,7 +74,8 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="{{route('documents')}}" class="nav-link">
+            <a href="{{route('documents')}}" class="nav-link
+            {{ request()->is('documents') ? 'active' : null }}">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Document Types
@@ -82,10 +83,24 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('accounts')}}" class="nav-link">
+            <a href="{{route('accounts')}}" class="nav-link
+            {{ request()->is('accounts') ? 'active' : null }}">
               <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Accounts
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {{-- <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();"> --}}
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+            {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+            </form> --}}
+              <i class="nav-icon fas fa-sign-out-alt"></i>
+              <p>
+                Logout
               </p>
             </a>
           </li>
