@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\DocumentType;
 use App\Models\Order;
 use App\Models\Status;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Nexmo\Laravel\Facade\Nexmo;
@@ -152,6 +153,7 @@ class OrdersCrud extends Component
                 elseif($item == 4){
                     Order::where('id', $index)->update([
                         'status_id' => 1,
+                        'expiration_time' => Carbon::tomorrow(),
                         'appeals' => $appeals ? $appeals : 'none',
                         'remarks' => $remarks ? $remarks : 'none'
                     ]);
