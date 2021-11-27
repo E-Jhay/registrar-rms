@@ -13,6 +13,7 @@ class DocumentsCrud extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $isOpen = 0;
+    public $buttonText = "Insert Document";
     public $name, $code, $days_before_expire, $price, $documentId;
 
     public function render()
@@ -63,6 +64,7 @@ class DocumentsCrud extends Component
 
     public function edit($id)
     {
+        $this->buttonText = "Update Document";
         $document = DocumentType::findOrFail($id);
         $this->name = $document->name;
         $this->code = $document->code;
@@ -89,6 +91,7 @@ class DocumentsCrud extends Component
 
     public function closeModal()
     {
+        $this->buttonText = "Insert Document";
         $this->isOpen = false;
     }
 }
