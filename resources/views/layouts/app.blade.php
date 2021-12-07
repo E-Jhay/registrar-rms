@@ -160,14 +160,21 @@ aria-hidden="true">
             title: event.detail.title,
             text: event.detail.text,
             icon: event.detail.type,
+            html: `
+                <input
+                type="text"
+                value=""
+                class="form-control mb-2"
+                placeholder="Claimed By"
+                id="claimedBy">`,
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             }).then((result) => {
             if (result.isConfirmed) {
-                // const remarks = Swal.getHtmlContainer().querySelector('#remarks')
+                const claimedBy = Swal.getHtmlContainer().querySelector('#claimedBy')
                 // console.log(appeals.value, remarks.value)
-                Livewire.emit('updateClaimableConfirmed')
+                Livewire.emit('updateClaimableConfirmed', claimedBy.value)
             }
         })
     })

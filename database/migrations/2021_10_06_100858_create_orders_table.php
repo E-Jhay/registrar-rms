@@ -28,6 +28,7 @@ class CreateOrdersTable extends Migration
             $table->timestamp('date_finished')->nullable();
             $table->string('appeals')->nullable();
             $table->string('remarks')->nullable();
+            $table->string('claimedBy')->nullable();
             $table->timestamps();
         });
     }

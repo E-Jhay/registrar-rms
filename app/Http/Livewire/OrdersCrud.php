@@ -28,7 +28,7 @@ class OrdersCrud extends Component
     protected $listeners = [
         'updateReleasedConfirmed' => 'updateReleasedConfirmed',
         'updatePendingConfirmed' => 'update',
-        'updateClaimableConfirmed' => 'update',
+        'updateClaimableConfirmed' => 'updateClaimableConfirmed',
 
     ];
     
@@ -152,7 +152,7 @@ class OrdersCrud extends Component
         
         try{
             $this->validate([
-                'selectedItems.*' => ['required', 'in:1,2,4'],
+                'selectedItems.*' => ['required', 'in:1,4'],
             ]);
             if($sms == 'yes'){
                 // // Get the numbers of the selected items
@@ -180,12 +180,6 @@ class OrdersCrud extends Component
                         'date_finished' => now(),
                     ]);
                 }
-                elseif($item == 2){
-                    Order::where('id', $index)->update([
-                        'status_id' => $item + 1,
-                        'date_received' => now(),
-                    ]);
-                }
                 elseif($item == 4){
                     Order::where('id', $index)->update([
                         'status_id' => 1,
@@ -202,6 +196,43 @@ class OrdersCrud extends Component
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
                 'message'=>"Requests/s Updated Successfully"
+            ]);
+            $this->selectedItems = [];
+            $this->selectAll = false;
+            $this->resetPage();
+        }catch(\Exception $e){
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>$e
+            ]);
+        }
+
+    }
+    public function updateClaimableConfirmed($claimedBy)
+    {
+        // dd($claimBy);
+        
+        try{
+            $this->validate([
+                'selectedItems.*' => ['required', 'in:2'],
+            ]);
+
+            foreach($this->selectedItems as $index => $item){
+                if($item == 2){
+                    Order::where('id', $index)->update([
+                        'status_id' => $item + 1,
+                        'date_received' => now(),
+                        'claimedBy' => $claimedBy ? $claimedBy : 'N/A',
+                    ]);
+                }
+            }
+
+            
+
+            
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Request/s Successfully Released"
             ]);
             $this->selectedItems = [];
             $this->selectAll = false;

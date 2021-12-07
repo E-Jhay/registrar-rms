@@ -22,6 +22,7 @@ class Order extends Model
         'expiration_time',
         'appeals',
         'remarks',
+        'claimedBy',
     ];
 
     public function document_type()

@@ -127,7 +127,11 @@
                                                     <th>Status</th>
                                                     <th>OR Number</th>
                                                     <th>Date Created</th>
-                                                    <th>Cost</th>
+                                                    @if ($documentStatus == 3)
+                                                        <th>Claimed By</th>
+                                                    @else
+                                                        <th>Cost</th>
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -156,7 +160,11 @@
                                                     </td>
                                                     <td>{{$order->or_no}}</td>
                                                     <td>{{$order->created_at->diffForHumans()}}</td>
-                                                    <td>{{$order->cost}}</td>
+                                                    @if ($documentStatus == 3)
+                                                        <td>{{$order->claimedBy}}</td>
+                                                    @else
+                                                        <td>{{$order->cost}}</td>
+                                                    @endif
                                                 </tr>
                                                 @empty
                                                     <tr>
