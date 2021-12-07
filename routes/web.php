@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'orders.create');
 Route::resource('/orders', 'App\Http\Controllers\OrdersController');
 Auth::routes();
 Route::middleware('auth')->group(function (){

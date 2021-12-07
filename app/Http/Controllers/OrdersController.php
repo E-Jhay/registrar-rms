@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only('index');
+
+    }
     /**
      * Display a listing of the resource.
      *

@@ -3,7 +3,7 @@
 @section('content')
 
   <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="@auth content-wrapper @endauth @guest p-4 @endguest">
     <!-- Content Header (Page header) -->
     <div class="content-header">
     <div class="container-fluid">
@@ -24,10 +24,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Fill-out form</h3>
   
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                            <i class="fas fa-minus"></i></button>
-                        </div>
+                        
                     </div>
                     <div class="card-body">
                         @livewire('orders-create')

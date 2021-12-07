@@ -23,16 +23,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
   @stack('css')
   @livewireStyles
 </head>
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed"  @guest style="background-color: rgba(223, 229, 247, 0.671)" @endguest>
 <div class="wrapper">
 
+  @auth
   @include('layouts.partials.navbar')
 
-  @include('layouts.partials.sidebar')
+  @include('layouts.partials.sidebar')    
+  @endauth
 
   @yield('content')
 
+  @auth
   @include('layouts.partials.footer')
+  @endauth
 </div>
 <!-- ./wrapper -->
 <!-- Logout Modal-->
