@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'welcome');
+Route::resource('/orders', 'App\Http\Controllers\OrdersController');
 Auth::routes();
 Route::middleware('auth')->group(function (){
     
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-    Route::resource('/orders', 'App\Http\Controllers\OrdersController');
     Route::view('/documents', 'documents.crud')->name('documents');
     Route::view('/accounts', 'accounts.crud')->name('accounts');
     Route::view('/monthly-reports', 'reports.monthly-reports')->name('monthly-reports');

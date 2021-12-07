@@ -68,8 +68,8 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>{{$accounts}}</h3>
-                        <p>Accounts</p>
+                        <h3>{{$ReleasedOrders}}</h3>
+                        <p>Released Orders this month</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>

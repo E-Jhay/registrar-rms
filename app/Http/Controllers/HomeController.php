@@ -21,7 +21,7 @@ class HomeController extends Controller
         $allOrders = Order::whereMonth('created_at', now()->month)->count();
         $pendingOrders = Order::where('status_id', 1)->count();
         $claimableOrders = Order::where('status_id', 2)->count();
-        $accounts = User::get()->count();
+        $ReleasedOrders = Order::where('status_id', 3)->whereMonth('created_at', now()->month)->count();
 
         // $orders = Order::select([
         //         DB::raw("DATE_FORMAT(created_at, '%m') as month"),
@@ -45,6 +45,6 @@ class HomeController extends Controller
         //     $report[$item->month] = $item->ordersCount;
         // });
         // return $report;
-        return view('dashboard', compact('allOrders', 'pendingOrders', 'claimableOrders', 'accounts'));
+        return view('dashboard', compact('allOrders', 'pendingOrders', 'claimableOrders', 'ReleasedOrders'));
     }
 }

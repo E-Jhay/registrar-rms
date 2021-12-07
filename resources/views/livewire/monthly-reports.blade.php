@@ -80,11 +80,16 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <td class="text-center">Total</td>
                                 <td class="text-center">{{$totalCount}}</td>
                             </tr>
                         </tbody>
                     </table>
+                    <div class="prepared-by float-right mr-3 mt-2">
+                      <strong>Prepared By:</strong>
+                      <p>{{Auth::user()->name}}</p>
+                    </div>
                   </div>
                   <!-- /.col -->
                 </div>

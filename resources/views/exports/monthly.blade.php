@@ -25,6 +25,7 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
             <td class="text-center">Total</td>
             <td class="text-center">{{$totalCount}}</td>
         </tr>

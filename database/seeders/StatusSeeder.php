@@ -17,6 +17,6 @@ class StatusSeeder extends Seeder
         Status::create(['name' => 'Pending']);
         Status::create(['name' => 'Claimable']);
         Status::create(['name' => 'Released']);
-        Status::create(['name' => 'Expired']);
+        Status::create(['name' => 'Overdue']);
     }
 }

@@ -81,25 +81,39 @@
                                             <option value="250">250</option>
                                         </select>
                                     </div>
-                                    @if ($documentStatus != 3)
-                                        <div class="form-group col-sm-12 mb-2">
-                                            <button class="btn btn-primary" wire:click.prevent="updateConfirm" @if($bulkDisabled) disabled @endif>
-                                                @if ($documentStatus == 4)
-                                                    Extend
-                                                @else
-                                                    Update
+                                        @if ($documentStatus)
+                                            <div class="form-group col-sm-12 mb-2">
+                                                <button class="btn btn-primary" 
+                                                @if ($documentStatus == 1)
+                                                    wire:click.prevent="updatePending"
                                                 @endif
-                                                <span class="badge badge-warning right">
-                                                    {{count($selectedItems)}}
-                                                </span></button>
-                                        </div>
-                                    @endif
+                                                @if ($documentStatus == 2 || $documentStatus == 4)
+                                                    wire:click.prevent="updateClaimable"
+                                                @endif
+                                                @if ($documentStatus == 3)
+                                                    wire:click.prevent="updateReleased"
+                                                @endif
+                                                @if($bulkDisabled) disabled @endif>
+                                                    @if ($documentStatus == 2)
+                                                        Release
+                                                    @elseif($documentStatus == 3)
+                                                        Request for 2nd 
+                                                    @elseif ($documentStatus == 4)
+                                                        Extend
+                                                    @else
+                                                        Update
+                                                    @endif
+                                                    <span class="badge badge-warning right">
+                                                        {{count($selectedItems)}}
+                                                    </span></button>
+                                            </div>
+                                        @endif
                                     <div class="col-sm-12">
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    @if ($documentStatus != 3)
+                                                    @if ($documentStatus)
                                                         <th class="text-center">
                                                             @if ($documentStatus != '')
                                                             <input type="checkbox" wire:model="selectAll">
@@ -119,11 +133,9 @@
                                             <tbody>
                                                 @forelse ($orders as $index => $order)
                                                 <tr>
-                                                    @if ($documentStatus != 3)
+                                                    @if ($documentStatus)
                                                         <td class="text-center">
-                                                            @if ($order->status_id != 3)
                                                             <input type="checkbox" wire:model="selectedItems.{{$order->id}}" name="selectedItems[{{$order->id}}]" value="{{$order->status_id}}">
-                                                            @endif
                                                         </td>
                                                     @endif
                                                     <td>{{$order->ctr_no}}</td>

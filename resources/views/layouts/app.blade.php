@@ -98,7 +98,7 @@ aria-hidden="true">
         })
     })
 
-    window.addEventListener('swal:ordersConfirm', event => {
+    window.addEventListener('swal:updateReleased', event => {
         Swal.fire({
             title: event.detail.title,
             text: event.detail.text,
@@ -124,7 +124,46 @@ aria-hidden="true">
                 const appeals = Swal.getHtmlContainer().querySelector('#appeals')
                 const remarks = Swal.getHtmlContainer().querySelector('#remarks')
                 // console.log(appeals.value, remarks.value)
-                Livewire.emit('updateConfirmed', appeals.value, remarks.value)
+                Livewire.emit('updateReleasedConfirmed', appeals.value, remarks.value)
+            }
+        })
+    })
+    window.addEventListener('swal:updatePending', event => {
+        Swal.fire({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+            html: `
+                <label>Send SMS Notification?</label>
+                <select class="form-control" id="sms">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes</option>
+                </select>`,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                const sms = Swal.getHtmlContainer().querySelector('#sms')
+                // const remarks = Swal.getHtmlContainer().querySelector('#remarks')
+                // console.log(appeals.value, remarks.value)
+                Livewire.emit('updatePendingConfirmed', sms.value)
+            }
+        })
+    })
+    window.addEventListener('swal:updateClaimable', event => {
+        Swal.fire({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                // const remarks = Swal.getHtmlContainer().querySelector('#remarks')
+                // console.log(appeals.value, remarks.value)
+                Livewire.emit('updateClaimableConfirmed')
             }
         })
     })

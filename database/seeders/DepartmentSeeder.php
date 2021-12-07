@@ -20,5 +20,6 @@ class DepartmentSeeder extends Seeder
         Department::create(['name' => 'BSE']);
         Department::create(['name' => 'BSHM']);
         Department::create(['name' => 'BSIT']);
+        Department::create(['name' => 'Cross Enrollee']);
     }
 }
