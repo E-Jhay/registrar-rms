@@ -223,6 +223,8 @@ class OrdersCrud extends Component
                         'status_id' => $item + 1,
                         'date_received' => now(),
                         'claimedBy' => $claimedBy ? $claimedBy : 'N/A',
+                        'appeals' => 'N/A',
+                        'remarks' => 'N/A'
                     ]);
                 }
             }
@@ -259,8 +261,8 @@ class OrdersCrud extends Component
                     Order::where('id', $index)->update([
                         'status_id' => 1,
                         'expiration_time' => Carbon::tomorrow(),
-                        'appeals' => $appeals ? $appeals : 'none',
-                        'remarks' => $remarks ? $remarks : 'none'
+                        'appeals' => $appeals ? $appeals : 'N/A',
+                        'remarks' => $remarks ? $remarks : 'N/A'
                     ]);
                 }
             }
