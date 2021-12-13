@@ -101,12 +101,12 @@ class OrdersCreate extends Component
             }
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
-                'message'=>"Order Inserted Successfully!!"
+                'message'=>"Document/s Successfully Requested"
             ]);
         }catch(\Exception $e){
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'error',
-                'message'=>"Something goes wrong while creating Order!!"
+                'message'=>"Something goes wrong"
             ]);
         }
 

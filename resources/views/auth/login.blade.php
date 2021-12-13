@@ -58,7 +58,7 @@
                 </span>
             @enderror
         </div>
-        <div class="row">
+        {{-- <div class="row">
           <div class="col-8">
                 <div class="icheck-primary">
                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -67,7 +67,7 @@
                     </label>
                 </div>
           </div>
-        </div>
+        </div> --}}
         <div>
             <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
         </div>
