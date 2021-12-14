@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Charts $charts)
     {
+        if(config('app.env') === 'production') {
+            \URL::forceScheme('https');
+        }
         $charts->register([
             \App\Charts\DashboardChart::class,
             \App\Charts\PieChart::class
