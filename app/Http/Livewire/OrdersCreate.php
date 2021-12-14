@@ -86,16 +86,27 @@ class OrdersCreate extends Component
                         $ctr_no = $code ."-". $count;
 
                     $cost = DocumentType::select('price')->where('id', $item['document_type_id'] + 1)->pluck('price')->toArray();
+                    // Order::create([
+                    //     'ctr_no'        =>  $ctr_no,
+                    //     'name'          =>  $item['name'],
+                    //     'mobile'        =>  $this->mobile,
+                    //     'cost'        =>  $cost[0],
+                    //     'department_id' =>  $item['department_id'] + 1,
+                    //     'document_type_id' =>  $item['document_type_id'] + 1,
+                    //     'status_id'        =>  1,
+                    //     'or_no'         =>  $this->or_no,
+                    //     'expiration_time'         =>  Carbon::now()->addDays($documentExpirationDay[$item['document_type_id']]),
+                    // ]);
                     Order::create([
-                        'ctr_no'        =>  $ctr_no,
-                        'name'          =>  $item['name'],
-                        'mobile'        =>  $this->mobile,
-                        'cost'        =>  $cost[0],
-                        'department_id' =>  $item['department_id'] + 1,
-                        'document_type_id' =>  $item['document_type_id'] + 1,
+                        'ctr_no'        =>  'ROR-01',
+                        'name'          =>  'aaaa',
+                        'mobile'        =>  '9959423520',
+                        'cost'        =>  21,
+                        'department_id' =>  1,
+                        'document_type_id' =>  1,
                         'status_id'        =>  1,
-                        'or_no'         =>  $this->or_no,
-                        'expiration_time'         =>  Carbon::now()->addDays($documentExpirationDay[$item['document_type_id']]),
+                        'or_no'         =>  'OR-01',
+                        'expiration_time'         =>  '2021-10-10',
                     ]);
                 }
             }
