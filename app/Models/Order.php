@@ -36,6 +36,6 @@ class Order extends Model
     }
     public function department()
     {
-        return $this->hasOne(Department::class);
+        return $this->belongsTo(Department::class, 'id', 'department_id');
     }
 }
