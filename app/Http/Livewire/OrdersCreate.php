@@ -76,41 +76,29 @@ class OrdersCreate extends Component
             array_push($documentExpirationDay, $document['days_before_expire']);
         }
         try{
-            // foreach($this->orderItems as $item){
-            //     if($item['name'] != null){
-            //         $count = Order::where('document_type_id', $item['document_type_id'] + 1)->count() + 1;
-            //         $code = $documentTypes[$item['document_type_id']];
-            //         if($count < 10)
-            //             $ctr_no = $code ."-0". $count;
-            //         else
-            //             $ctr_no = $code ."-". $count;
+            foreach($this->orderItems as $item){
+                if($item['name'] != null){
+                    $count = Order::where('document_type_id', $item['document_type_id'] + 1)->count() + 1;
+                    $code = $documentTypes[$item['document_type_id']];
+                    if($count < 10)
+                        $ctr_no = $code ."-0". $count;
+                    else
+                        $ctr_no = $code ."-". $count;
 
-            //         $cost = DocumentType::select('price')->where('id', $item['document_type_id'] + 1)->pluck('price')->toArray();
-            //         Order::create([
-            //             'ctr_no'        =>  $ctr_no,
-            //             'name'          =>  $item['name'],
-            //             'mobile'        =>  $this->mobile,
-            //             'cost'        =>  $cost[0],
-            //             'department_id' =>  $item['department_id'] + 1,
-            //             'document_type_id' =>  $item['document_type_id'] + 1,
-            //             'status_id'        =>  1,
-            //             'or_no'         =>  $this->or_no,
-            //             'expiration_time'         =>  Carbon::now()->addDays($documentExpirationDay[$item['document_type_id']]),
-            //         ]);
-            //     }
-            // }
-
-            Order::create([
-                'ctr_no'        =>  'aaaa',
-                'name'          =>  'aaaaa',
-                'mobile'        =>  '9959423520',
-                'cost'        =>  10,
-                'department_id' =>  1,
-                'document_type_id' =>  1,
-                'status_id'        =>  1,
-                'or_no'         =>  'OR-01',
-                'expiration_time'         =>  Carbon::now()->addDays($documentExpirationDay[$item['document_type_id']]),
-            ]);
+                    $cost = DocumentType::select('price')->where('id', $item['document_type_id'] + 1)->pluck('price')->toArray();
+                    Order::create([
+                        'ctr_no'        =>  $ctr_no,
+                        'name'          =>  $item['name'],
+                        'mobile'        =>  $this->mobile,
+                        'cost'        =>  $cost[0],
+                        'department_id' =>  $item['department_id'] + 1,
+                        'document_type_id' =>  $item['document_type_id'] + 1,
+                        'status_id'        =>  1,
+                        'or_no'         =>  $this->or_no,
+                        'expiration_time'         =>  Carbon::now()->addDays($documentExpirationDay[$item['document_type_id']]),
+                    ]);
+                }
+            }
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
                 'message'=>"Document/s Successfully Requested"
