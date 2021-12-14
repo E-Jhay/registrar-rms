@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1 class="m-0 d-inline">Dashboard</h1>
-                <a href="{{route('orders.create')}}" class="btn btn-primary float-right">Add Request</a>
+                <a href="{{route('orders.create')}}" class="btn btn-primary float-right">Request Document</a>
             </div><!-- /.col -->
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -79,7 +79,7 @@
             </div>
             <!-- /.content -->
             <!-- ./col -->
-            <div class="col-8">
+            <div class="col-12 col-sm-3 col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Requests</div>
@@ -89,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-12 col-sm-3 col-md-4">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Request Statuses</div>

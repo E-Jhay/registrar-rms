@@ -17,7 +17,7 @@
           <div class="row">
               <div class="col-sm-12">
                   <h1 class="m-0 d-inline">{{$titlePage}}</h1>
-                  <a href="{{route('orders.create')}}" class="d-inline btn btn-primary float-right">Add Request</a>
+                  <a href="{{route('orders.create')}}" class="d-inline btn btn-primary float-right">Request Document</a>
               </div><!-- /.col -->
           </div><!-- /.row -->
       </div><!-- /.container-fluid -->
