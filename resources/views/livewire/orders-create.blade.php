@@ -77,7 +77,7 @@
     @endforeach
     <div class="row">
         <div class="form-group col-12">
-          <a class="btn btn-secondary" wire:click.prevent="addItem" wire:loading.attr="disabled">Add another row</a>
+          <a class="btn btn-secondary" wire:click.prevent="addItem" wire:loading.attr="disabled">Add Request Row</a>
         </div>
     </div>
     <div class="row">
