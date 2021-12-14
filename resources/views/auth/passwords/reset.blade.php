@@ -2,24 +2,24 @@
 <html>
 <head>
     <title>Reset Password</title>
-    <link rel="icon" href="{{ asset('dist/img/psu_logo.png') }}" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="{{ asset('custom-css/style.css') }}">
+    <link rel="icon" href="{{ secure_asset('dist/img/psu_logo.png') }}" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="{{ secure_asset('custom-css/style.css') }}">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<img class="wave" src="{{ asset('custom-img/waveee.png') }}">
+	<img class="wave" src="{{ secure_asset('custom-img/waveee.png') }}">
 	<div class="container">
 		<div class="img">
-			<img src="{{ asset('custom-img/reset-password-bg.svg') }}">
+			<img src="{{ secure_asset('custom-img/reset-password-bg.svg') }}">
 		</div>
 		<div class="login-content">
 			<form method="POST" action="{{ route('password.update') }}">
                 @csrf
                 <input type="hidden" name="token" value="{{ $token }}">
 				<fieldset>
-					<legend><img src="img/avatar.svg{{ asset('custom-img/avatar.svg') }}"></legend>
+					<legend><img src="img/avatar.svg{{ secure_asset('custom-img/avatar.svg') }}"></legend>
 					<h4 class="title">Reset Password</h4>
            			<div class="input-div one">
            		   		<div class="i">
@@ -63,6 +63,6 @@
             </form>
         </div>
     </div>
-    <script type="text/javascript" src="{{asset('custom-js/main.js')}}"></script>
+    <script type="text/javascript" src="{{secure_asset('custom-js/main.js')}}"></script>
 </body>
 </html>

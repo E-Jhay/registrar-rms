@@ -11,15 +11,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>{{ config('app.name', 'Registrar Office') }}</title>
-  <link rel="icon" href="{{ asset('dist/img/psu_logo.png') }}" type="image/x-icon">
+  <link rel="icon" href="{{ secure_asset('dist/img/psu_logo.png') }}" type="image/x-icon">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ secure_asset('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ secure_asset('dist/css/adminlte.min.css') }}">
   @stack('css')
   @livewireStyles
 </head>
@@ -71,11 +71,11 @@ aria-hidden="true">
 
 @livewireScripts
 <!-- jQuery -->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ secure_asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ secure_asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+<script src="{{ secure_asset('dist/js/adminlte.min.js') }}"></script>
 <!-- Charting library -->
 <script src="https://unpkg.com/chart.js@^2.9.3/dist/Chart.min.js"></script>
 <!-- Chartisan -->
