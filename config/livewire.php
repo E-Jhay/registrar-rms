@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => 'https://registrar-rms.herokuapp.com',
+    'asset_url' => 'http://localhost/RegistrarOffice/public',
 
     /*
     |--------------------------------------------------------------------------
