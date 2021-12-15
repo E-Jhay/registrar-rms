@@ -19,9 +19,9 @@ class CreateOrdersTable extends Migration
             $table->string('name');
             $table->string('mobile');
             $table->decimal('cost', 10, 2)->nullable();
-            $table->foreignId('department_id')->constrained();
-            $table->foreignId('document_type_id')->constrained();
-            $table->foreignId('status_id')->constrained();
+            $table->foreignId('department_id')->constrained()->default(1);
+            $table->foreignId('document_type_id')->constrained()->default(1);
+            $table->foreignId('status_id')->constrained()->default(1);
             $table->string('or_no');
             $table->dateTime('expiration_time')->nullable();
             $table->timestamp('date_received')->nullable();
