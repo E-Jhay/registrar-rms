@@ -38,4 +38,8 @@ class Order extends Model
     {
         return $this->belongsTo(Department::class);
     }
+    public function updatedBy()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

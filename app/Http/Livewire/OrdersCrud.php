@@ -160,12 +160,14 @@ class OrdersCrud extends Component
                 if($item == 1){
                     Order::where('id', $index)->update([
                         'status_id' => $item + 1,
+                        'user_id' => auth()->user()->id,
                         'date_finished' => now(),
                     ]);
                 }
                 elseif($item == 4){
                     Order::where('id', $index)->update([
                         'status_id' => 1,
+                        'user_id' => auth()->user()->id,
                         'expiration_time' => Carbon::tomorrow(),
                         // 'appeals' => $appeals ? $appeals : 'none',
                         // 'remarks' => $remarks ? $remarks : 'none'
@@ -225,7 +227,8 @@ class OrdersCrud extends Component
                         'date_received' => now(),
                         'claimedBy' => $claimedBy ? $claimedBy : 'N/A',
                         'appeals' => 'N/A',
-                        'remarks' => 'N/A'
+                        'remarks' => 'N/A',
+                        'user_id' => auth()->user()->id,
                     ]);
                 }
             }
@@ -263,7 +266,8 @@ class OrdersCrud extends Component
                         'status_id' => 1,
                         'expiration_time' => Carbon::tomorrow(),
                         'appeals' => $appeals ? $appeals : 'N/A',
-                        'remarks' => $remarks ? $remarks : 'N/A'
+                        'remarks' => $remarks ? $remarks : 'N/A',
+                        'user_id' => auth()->user()->id,
                     ]);
                 }
             }

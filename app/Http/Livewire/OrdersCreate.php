@@ -96,6 +96,7 @@ class OrdersCreate extends Component
                         'status_id'        =>  1,
                         'or_no'         =>  $this->or_no,
                         'expiration_time'         =>  Carbon::now()->addDays($documentExpirationDay[$item['document_type_id']]),
+                        'user_id' => auth()->user() ? auth()->user()->id : 1,
                     ]);
                 }
             }

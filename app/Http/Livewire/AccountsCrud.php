@@ -69,7 +69,7 @@ class AccountsCrud extends Component
             User::create([
                 'name'  =>  $this->name,
                 'email'  =>  $this->email,
-                'password'  =>  $this->password,
+                'password' => bcrypt($this->password)
             ]);
 
             $this->dispatchBrowserEvent('alert',[

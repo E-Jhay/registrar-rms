@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
             $table->string('appeals')->nullable();
             $table->string('remarks')->nullable();
             $table->string('claimedBy')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
