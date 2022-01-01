@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function (){
 
     Route::view('/documents', 'documents.crud')->name('documents');
     Route::view('/accounts', 'accounts.crud')->name('accounts');
+    Route::view('/logs', 'logs.crud')->name('logs');
     Route::view('/monthly-reports', 'reports.monthly-reports')->name('monthly-reports');
     Route::view('/quarterly-reports', 'reports.quarterly-reports')->name('quarterly-reports');
 

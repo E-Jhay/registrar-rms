@@ -29,9 +29,10 @@ class OrdersCrud extends Component
         'updateReleasedConfirmed' => 'updateReleasedConfirmed',
         'updatePendingConfirmed' => 'update',
         'updateClaimableConfirmed' => 'updateClaimableConfirmed',
+        'rejectPendingConfirmed' => 'rejectPendingConfirmed',
 
     ];
-    
+
     public function render()
     {
         $this->bulkDisabled = count($this->selectedItems) < 1;
@@ -149,11 +150,29 @@ class OrdersCrud extends Component
     public function update($sms = 'no')
     {
         // dd($appeals, $remarks);
-        
+
         try{
             $this->validate([
                 'selectedItems.*' => ['required', 'in:1,4'],
             ]);
+
+            foreach($this->selectedItems as $index => $item){
+                if($item == 1){
+                    Order::where('id', $index)->update([
+                        'status_id' => $item + 1,
+                        'date_finished' => now(),
+                    ]);
+                }
+                elseif($item == 4){
+                    Order::where('id', $index)->update([
+                        'status_id' => 1,
+                        'expiration_time' => Carbon::tomorrow(),
+                        // 'appeals' => $appeals ? $appeals : 'none',
+                        // 'remarks' => $remarks ? $remarks : 'none'
+                    ]);
+                }
+            }
+
             if($sms == 'yes'){
                 // // Get the numbers of the selected items
                 $numbers = Order::find(array_keys($this->selectedItems))
@@ -173,26 +192,8 @@ class OrdersCrud extends Component
                 }
             }
 
-            foreach($this->selectedItems as $index => $item){
-                if($item == 1){
-                    Order::where('id', $index)->update([
-                        'status_id' => $item + 1,
-                        'date_finished' => now(),
-                    ]);
-                }
-                elseif($item == 4){
-                    Order::where('id', $index)->update([
-                        'status_id' => 1,
-                        'expiration_time' => Carbon::tomorrow(),
-                        // 'appeals' => $appeals ? $appeals : 'none',
-                        // 'remarks' => $remarks ? $remarks : 'none'
-                    ]);
-                }
-            }
 
-            
 
-            
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
                 'message'=>"Requests/s Updated Successfully"
@@ -211,7 +212,7 @@ class OrdersCrud extends Component
     public function updateClaimableConfirmed($claimedBy)
     {
         // dd($claimBy);
-        
+
         try{
             $this->validate([
                 'selectedItems.*' => ['required', 'in:2'],
@@ -229,9 +230,9 @@ class OrdersCrud extends Component
                 }
             }
 
-            
 
-            
+
+
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
                 'message'=>"Request/s Successfully Released"
@@ -250,7 +251,7 @@ class OrdersCrud extends Component
     public function updateReleasedConfirmed($appeals, $remarks)
     {
         // dd($appeals, $remarks);
-        
+
         try{
             $this->validate([
                 'selectedItems.*' => ['required', 'in:3'],
@@ -267,9 +268,9 @@ class OrdersCrud extends Component
                 }
             }
 
-            
 
-            
+
+
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
                 'message'=>"Successfully Requested for 2nd Copy"
@@ -286,4 +287,36 @@ class OrdersCrud extends Component
 
     }
 
+    // Reject Pending Requests
+    public function rejectPending()
+    {
+        $this->dispatchBrowserEvent('swal:rejectPending',[
+            'type'  =>  'warning',
+            'title' =>  'Are you sure you want to reject selected Items?',
+            'text'  =>  '',
+            // 'id'    =>  $id,
+        ]);
+    }
+
+    public function rejectPendingConfirmed()
+    {
+
+        try{
+            Order::whereIn('id', array_keys($this->selectedItems))->delete();
+
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Items Rejected Successfully"
+            ]);
+            $this->selectedItems = [];
+            $this->selectAll = false;
+            $this->resetPage();
+        }catch(\Exception $e){
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>$e
+            ]);
+        }
+
+    }
 }

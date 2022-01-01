@@ -92,6 +92,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('logs')}}" class="nav-link
+            {{ request()->is('logs') ? 'active' : null }}">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Logs
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             {{-- <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
             document.getElementById('logout-form').submit();"> --}}
             <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">

@@ -193,6 +193,21 @@ aria-hidden="true">
             }
         })
     })
+    window.addEventListener('swal:rejectPending', event => {
+        Swal.fire({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+            id: event.detail.id,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Livewire.emit('rejectPendingConfirmed')
+            }
+        })
+    })
 </script>
 <script>
     Livewire.on('gotoTop', () => {

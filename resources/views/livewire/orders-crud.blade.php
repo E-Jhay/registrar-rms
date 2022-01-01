@@ -106,6 +106,16 @@
                                                     <span class="badge badge-warning right">
                                                         {{count($selectedItems)}}
                                                     </span></button>
+                                                @if ($documentStatus == 1)
+                                                    <button class="btn btn-danger"
+                                                    wire:click.prevent="rejectPending"
+                                                    @if($bulkDisabled) disabled @endif>
+                                                        Reject
+                                                        <span class="badge badge-warning right">
+                                                            {{count($selectedItems)}}
+                                                        </span></button>
+                                                    </button>
+                                                @endif
                                             </div>
                                         @endif
                                     <div class="col-sm-12">
