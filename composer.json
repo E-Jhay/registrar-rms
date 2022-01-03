@@ -17,7 +17,8 @@
         "laravel/ui": "^3.3",
         "livewire/livewire": "^2.6",
         "maatwebsite/excel": "^3.1",
-        "nexmo/laravel": "^2.4"
+        "nexmo/laravel": "^2.4",
+        "spatie/laravel-backup": "^7.7"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
