@@ -16,7 +16,7 @@ class LogsCrud extends Component
     public $searchTerm;
     public $sortId;
     public $sortUser;
-    public $sortBy = 'created_at';
+    public $sortBy = 'updated_at';
     public $sortDirection = 'desc';
     public $perPage = 10;
     public $documentStatus = "";

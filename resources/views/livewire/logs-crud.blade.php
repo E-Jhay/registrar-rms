@@ -66,7 +66,8 @@
                                     </div>
                                     <div class="form-group col-2 mt-2">
                                         <select class="form-control custom-select border-secondary" wire:model="sortBy">
-                                            <option value="created_at">Date Created</option>
+                                            <option value="updated_at">Updated At</option>
+                                            <option value="created_at">Created At</option>
                                             <option value="name">Name</option>
                                             <option value="department_id">Department</option>
                                             <option value="ctr_no">Control Number</option> 
@@ -99,7 +100,7 @@
                                                     <th>Department</th>
                                                     <th>Status</th>
                                                     <th>OR Number</th>
-                                                    <th>Date Created</th>
+                                                    <th>Date Updated</th>
                                                     @if ($documentStatus == 3)
                                                         <th>Claimed By</th>
                                                     @else
@@ -128,7 +129,7 @@
                                                          rounded px-1">{{$order->status->name}}</div>
                                                     </td>
                                                     <td>{{$order->or_no}}</td>
-                                                    <td>{{$order->created_at->diffForHumans()}}</td>
+                                                    <td>{{$order->updated_at}}</td>
                                                     @if ($documentStatus == 3)
                                                         <td>{{$order->claimedBy}}</td>
                                                     @else
