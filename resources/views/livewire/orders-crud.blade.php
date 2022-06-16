@@ -87,11 +87,14 @@
                                                 @if ($documentStatus == 1)
                                                     wire:click.prevent="updatePending"
                                                 @endif
-                                                @if ($documentStatus == 2 || $documentStatus == 4)
+                                                @if ($documentStatus == 2)
                                                     wire:click.prevent="updateClaimable"
                                                 @endif
                                                 @if ($documentStatus == 3)
                                                     wire:click.prevent="updateReleased"
+                                                @endif
+                                                @if ($documentStatus == 4)
+                                                    wire:click.prevent="updateExpired"
                                                 @endif
                                                 @if($bulkDisabled) disabled @endif>
                                                     @if ($documentStatus == 2)
@@ -113,9 +116,13 @@
                                                         Reject
                                                         <span class="badge badge-warning right">
                                                             {{count($selectedItems)}}
-                                                        </span></button>
+                                                        </span>
                                                     </button>
                                                 @endif
+                                                <button class="btn btn-success"
+                                                    wire:click.prevent="refresh">
+                                                        Refresh
+                                                </button>
                                             </div>
                                         @endif
                                     <div class="col-sm-12">

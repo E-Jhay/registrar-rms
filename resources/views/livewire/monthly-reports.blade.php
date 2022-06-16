@@ -1,5 +1,5 @@
 @push('css')
-<link rel="stylesheet" href="{{ asset('css/print.css') }}">
+<link rel="stylesheet" href="{{ asset('css/monthly.css') }}">
 @endpush
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -18,15 +18,15 @@
           </div>
           <select class="form-control custom-select col-sm-2" wire:model="month">
             <option value="" disabled>Select Month</option>
-            <option value="01">January</option>
-            <option value="02">February</option>
-            <option value="03">March</option>
-            <option value="04">April</option>
-            <option value="05">May</option>
-            <option value="06">June</option>
-            <option value="07">July</option>
-            <option value="08">August</option>
-            <option value="09">September</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
             <option value="10">October</option>
             <option value="11">November</option>
             <option value="12">December</option>

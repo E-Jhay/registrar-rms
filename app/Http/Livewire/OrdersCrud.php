@@ -30,6 +30,7 @@ class OrdersCrud extends Component
         'updatePendingConfirmed' => 'update',
         'updateClaimableConfirmed' => 'updateClaimableConfirmed',
         'rejectPendingConfirmed' => 'rejectPendingConfirmed',
+        'extendConfirmed' => 'extendConfirmed',
 
     ];
 
@@ -41,6 +42,10 @@ class OrdersCrud extends Component
             'statuses' => Status::all(),
             'documentTypes' => DocumentType::select('id', 'name', 'code')->orderBy('name')->get()
         ]);
+    }
+
+    public function refresh() {
+        $this->resetPage();
     }
 
     public function updatedSearchTerm()
@@ -156,25 +161,6 @@ class OrdersCrud extends Component
                 'selectedItems.*' => ['required', 'in:1,4'],
             ]);
 
-            foreach($this->selectedItems as $index => $item){
-                if($item == 1){
-                    Order::where('id', $index)->update([
-                        'status_id' => $item + 1,
-                        'user_id' => auth()->user()->id,
-                        'date_finished' => now(),
-                    ]);
-                }
-                elseif($item == 4){
-                    Order::where('id', $index)->update([
-                        'status_id' => 1,
-                        'user_id' => auth()->user()->id,
-                        'expiration_time' => Carbon::tomorrow(),
-                        // 'appeals' => $appeals ? $appeals : 'none',
-                        // 'remarks' => $remarks ? $remarks : 'none'
-                    ]);
-                }
-            }
-
             if($sms == 'yes'){
                 // // Get the numbers of the selected items
                 $numbers = Order::find(array_keys($this->selectedItems))
@@ -190,6 +176,25 @@ class OrdersCrud extends Component
                         'to'    =>  '63'.$mobile,
                         'from'  =>  '639959423520',
                         'text'  =>  'Your request at the registrar is ready to claim!. Click the link to set an appointment https://docs.google.com/forms/d/e/1FAIpQLSeJk3Jko-2nC4AG09tI7hfNsxyQsqlaO4ZkYz1nHzY4-SX7Vg/viewform'
+                    ]);
+                }
+            }
+
+            foreach($this->selectedItems as $index => $item){
+                if($item == 1){
+                    Order::where('id', $index)->update([
+                        'status_id' => $item + 1,
+                        'user_id' => auth()->user()->id,
+                        'date_finished' => now(),
+                    ]);
+                }
+                elseif($item == 4){
+                    Order::where('id', $index)->update([
+                        'status_id' => 1,
+                        'user_id' => auth()->user()->id,
+                        'expiration_time' => Carbon::tomorrow(),
+                        // 'appeals' => $appeals ? $appeals : 'none',
+                        // 'remarks' => $remarks ? $remarks : 'none'
                     ]);
                 }
             }
@@ -322,5 +327,49 @@ class OrdersCrud extends Component
             ]);
         }
 
+    }
+
+    // Extend expired selected items
+    public function updateExpired() {
+        $this->dispatchBrowserEvent('swal:extend',[
+            'type'  =>  'warning',
+            'title' =>  'Are you sure you want to Extend selected items?',
+            'text'  =>  '',
+            // 'id'    =>  $id,
+        ]);
+    }
+
+    public function extendConfirmed() {
+        try{
+            $this->validate([
+                'selectedItems.*' => ['required', 'in:4'],
+            ]);
+
+            foreach($this->selectedItems as $index => $item){
+                if($item == 4){
+                    Order::where('id', $index)->update([
+                        'status_id' => 1,
+                        'expiration_time' => Carbon::tomorrow(),
+                        'user_id' => auth()->user()->id,
+                    ]);
+                }
+            }
+
+
+
+
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Successfully Extended"
+            ]);
+            $this->selectedItems = [];
+            $this->selectAll = false;
+            $this->resetPage();
+        }catch(\Exception $e){
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>$e
+            ]);
+        }
     }
 }

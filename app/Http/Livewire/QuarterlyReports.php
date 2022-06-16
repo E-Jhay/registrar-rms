@@ -34,27 +34,27 @@ class QuarterlyReports extends Component
     {
         if(now()->month >= 1 && now()->month <= 3){
             $this->year = now()->year - 1;
-            $this->start = '10';
-            $this->end = '12';
-            $this->quarter = '4th';
+            $this->start = '1';
+            $this->end = '3';
+            $this->quarter = '1st';
         }
         elseif(now()->month >= 4 && now()->month <= 6){
             $this->year = now()->year;
-            $this->start = '01';
-            $this->end = '03';
-            $this->quarter = '1st';
+            $this->start = '4';
+            $this->end = '6';
+            $this->quarter = '2nd';
         }
         elseif(now()->month >= 7 && now()->month <= 9){
             $this->year = now()->year;
-            $this->start = '04';
-            $this->end = '06';
-            $this->quarter = '2nd';
+            $this->start = '7';
+            $this->end = '9';
+            $this->quarter = '3rd';
         }
         elseif(now()->month >= 10 && now()->month <= 12){
             $this->year = now()->year;
-            $this->start = '07';
-            $this->end = '09';
-            $this->quarter = '3rd';
+            $this->start = '10';
+            $this->end = '12';
+            $this->quarter = '4th';
         }
     }
 

@@ -64,10 +64,7 @@ class MonthlyReports extends Component
 
     public function mount()
     {
-        $this->month = now()->month - 1;
-        if($this->month == '01')
-            $this->year = now()->year - 1;
-        else
+        $this->month = now()->month;
             $this->year = now()->year;
         // $this->monthYear = Carbon::createFromFormat('m', $this->month)->format('F')." ". now()->year;
     }
