@@ -82,7 +82,7 @@
     </div>
     <div class="row">
         <div class="form-group col-12">
-          <button type="submit" class="btn btn-primary">Submit Request/s</button>
+          <button type="submit" class="btn btn-primary" wire:click="$emit('refreshComponent')">Submit Request/s</button>
         </div>
     </div>
 </form>

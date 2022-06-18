@@ -15,6 +15,8 @@ class OrdersCreate extends Component
     public $departments = [];
     public $orderItems = [];
 
+    protected $listeners = ['refreshComponent' => '$refresh'];
+
     public function mount()
     {
         $this->document_types = DocumentType::select('id', 'name')->orderBy('name')->get();
@@ -112,7 +114,6 @@ class OrdersCreate extends Component
         }
 
         $this->resetFields();
-
     }
     
 }

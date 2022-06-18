@@ -215,7 +215,11 @@ class OrdersCrud extends Component
             ]);
         }
 
+        $this->emitTo('Que', '$refresh');
+
     }
+
+
     public function updateClaimableConfirmed($claimedBy)
     {
         // dd($claimBy);
