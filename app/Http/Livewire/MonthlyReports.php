@@ -10,6 +10,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Symfony\Component\HttpFoundation\Response;
+use Carbon\Carbon;
 
 class MonthlyReports extends Component
 {
@@ -78,8 +79,8 @@ class MonthlyReports extends Component
             DB::raw('COUNT(id) as ordersCount'),
         ])
         ->where('status_id', 3)
-        ->whereYear('created_at', $this->year)
-        ->whereMonth('created_at', $this->month)
+        ->whereYear('date_received', $this->year)
+        ->whereMonth('date_received', $this->month)
         ->groupBy('department_id')
         ->groupBy('document_type_id')
         ->orderBy('document_type_id')
@@ -121,8 +122,8 @@ class MonthlyReports extends Component
             DB::raw('COUNT(id) as total'),
         ])
         ->where('status_id', 3)
-        ->whereYear('created_at', $this->year)
-        ->whereMonth('created_at', $this->month)
+        ->whereYear('date_received', $this->year)
+        ->whereMonth('date_received', $this->month)
         ->groupBy('document_type_id')
         ->orderBy('document_type_id')
         ->get()
@@ -134,13 +135,14 @@ class MonthlyReports extends Component
     {
         return Order::select('id')
         ->where('status_id', 3)
-        ->whereYear('created_at', $this->year)
-        ->whereMonth('created_at', $this->month)
+        ->whereYear('date_received', $this->year)
+        ->whereMonth('date_received', $this->month)
         ->count();
     }
     public function export($ext)
     {
+        $month = Carbon::createFromFormat('m', $this->month)->format('F');
         abort_if(!in_array($ext, ['xlsx']), Response::HTTP_NOT_FOUND);
-        return Excel::download(new MonthlyExport($this->report, $this->departments, $this->documentTypes, $this->totalCountPerDocs, $this->totalCount, $this->month), 'monthly-accomplishment-report.' .$ext);
+        return Excel::download(new MonthlyExport($this->report, $this->departments, $this->documentTypes, $this->totalCountPerDocs, $this->totalCount, $this->month), $month. '-'. $this->year .'-accomplishment-report.' .$ext);
     }
 }

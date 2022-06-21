@@ -33,10 +33,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   @endauth
 
   @yield('content')
-
+{{-- 
   @auth
   @include('layouts.partials.footer')
-  @endauth
+  @endauth --}}
 </div>
 <!-- ./wrapper -->
 <!-- Logout Modal-->

@@ -1,4 +1,4 @@
-<div class="que" wire:poll.visible>
+<div class="que" wire:poll.8000ms>
     <div class="processing">
         <h2 class="title">Processing</h2>
         <ul>
