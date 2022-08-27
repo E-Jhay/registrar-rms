@@ -12,4 +12,3 @@ create database named registraroffice
 php artisan migrate
 
 php artisan db:seed
-```
