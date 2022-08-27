@@ -63,6 +63,7 @@ class OrdersCreate extends Component
             'orderItems.*.department_id'    =>  ['required'],
             ],
             [
+            'mobile.regex'  =>  'The mobile number format is invalid it should consist of 10 numbers',
             'orderItems.*.name.required'             =>  'The name is required',
             'orderItems.*.document_type_id.required'  =>  'The document type is required',
             'orderItems.*.department_id.required'  =>  'The department is required',
